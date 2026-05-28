@@ -1,14 +1,11 @@
-.icon{
-  width: 60px;
-}
 .barnav {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 5px;
   background-color: #666bb8;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.144);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .links {
@@ -27,5 +24,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
 }

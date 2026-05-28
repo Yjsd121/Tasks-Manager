@@ -10,12 +10,11 @@ export function Login() {
         borderRadius: '20px'
       }}
       >
-        <img src='favicon.svg' />
+        <img className='icon' src='TasksIcon.png' />
       </div>
 
       <h2>Gestor de tareas</h2>
       <form className='login-container'>
-
         <div className='login'>
           <label>User</label>
           <div className='input-style'>

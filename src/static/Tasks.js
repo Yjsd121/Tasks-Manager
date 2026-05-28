@@ -45,5 +45,76 @@ export const tasks = [
     createdBy: 'Admin',
     dueDate: '2026-06-05',
     createdAt: '2026-05-26'
+  },
+
+  {
+    id: 5,
+    title: 'Dark mode UI',
+    description: 'Create dark theme for dashboard',
+    status: 'pending',
+    priority: 'low',
+    assignedTo: 'Luis',
+    createdBy: 'Admin',
+    dueDate: '2026-06-05',
+    createdAt: '2026-05-26'
+  },
+
+  {
+    id: 6,
+    title: 'Dark mode UI',
+    description: 'Create dark theme for dashboard',
+    status: 'pending',
+    priority: 'low',
+    assignedTo: 'Luis',
+    createdBy: 'Admin',
+    dueDate: '2026-06-05',
+    createdAt: '2026-05-26'
+  },
+  {
+    id: 7,
+    title: 'Dark mode UI',
+    description: 'Create dark theme for dashboard',
+    status: 'pending',
+    priority: 'low',
+    assignedTo: 'Luis',
+    createdBy: 'Admin',
+    dueDate: '2026-06-05',
+    createdAt: '2026-05-26'
+  },
+
+  {
+    id: 8,
+    title: 'Dark mode UI',
+    description: 'Create dark theme for dashboard',
+    status: 'pending',
+    priority: 'low',
+    assignedTo: 'Luis',
+    createdBy: 'Admin',
+    dueDate: '2026-06-05',
+    createdAt: '2026-05-26'
+  },
+
+  {
+    id: 9,
+    title: 'Dark mode UI',
+    description: 'Create dark theme for dashboard',
+    status: 'pending',
+    priority: 'low',
+    assignedTo: 'Luis',
+    createdBy: 'Admin',
+    dueDate: '2026-06-05',
+    createdAt: '2026-05-26'
+  },
+
+  {
+    id: 10,
+    title: 'Dark mode UI',
+    description: 'Create dark theme for dashboard',
+    status: 'pending',
+    priority: 'low',
+    assignedTo: 'Luis',
+    createdBy: 'Admin',
+    dueDate: '2026-06-05',
+    createdAt: '2026-05-26'
   }
 ]

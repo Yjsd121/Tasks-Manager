@@ -1,24 +1,56 @@
 .Tasks-container {
+  margin-top: 20px;
   padding: 10px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.task-card {
+  border-radius: 10px;
+  overflow: hidden;
+  transition: .2s;
+  height: fit-content;
+}
+
+.task-card:hover {
+  transform: translateY(-5px);
 }
 
 .tasks {
-  background: white;
-  padding: 1rem;
-  border-radius: 15px;
-
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
 }
 
 .status {
   width: 100%;
   text-align: center;
-  background-color: green;
-  height: 100px;
+  height: 40px;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-top:
+    solid 1px rgba(128, 128, 128, 0.2);
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.date {
+  font-size: .9rem;
+  opacity: .7;
 }
