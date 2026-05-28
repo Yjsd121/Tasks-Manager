@@ -1,0 +1,31 @@
+.icon{
+  width: 60px;
+}
+.barnav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  background-color: #666bb8;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.144);
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.link {
+  background-color: rgba(255, 255, 255, 0.144);
+  gap: .25rem;
+  border-radius: 10px;
+  padding: 5px;
+  text-decoration: none;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}

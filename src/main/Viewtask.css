@@ -1,0 +1,24 @@
+.Tasks-container {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.tasks {
+  background: white;
+  padding: 1rem;
+  border-radius: 15px;
+
+}
+
+.status {
+  width: 100%;
+  text-align: center;
+  background-color: green;
+  height: 100px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
