@@ -19,15 +19,15 @@ export function Login() {
           <label>User</label>
           <div className='input-style'>
             <MailOutlineOutlinedIcon className='icon' />
-            <input placeholder='email' />
+            <input className='login-input' placeholder='email' />
           </div>
           <label>Password</label>
           <div className='input-style'>
             <VpnKeyOutlinedIcon className='icon' />
-            <input placeholder='password' />
+            <input className='login-input' placeholder='password' />
           </div>
         </div>
-        <button>Login</button>
+        <button className='primary-button'>Login</button>
       </form>
 
     </main>

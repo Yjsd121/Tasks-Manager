@@ -9,6 +9,7 @@ export function App() {
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/tasksView' element={<Viewtask />} />
+        {/* <Route path='/AdminView' element={<AdminView />} /> */}
       </Routes>
     </BrowserRouter>
   )

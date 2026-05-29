@@ -55,3 +55,9 @@
 .icon {
   color: rgba(95, 95, 95, 0.87);
 }
+
+.login-input {
+  border: 2px solid transparent;
+  background-color: transparent;
+  color: rgba(95, 95, 95, 0.87);
+}

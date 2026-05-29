@@ -54,3 +54,14 @@
   font-size: .9rem;
   opacity: .7;
 }
+
+.btn-card {
+  border: 2px solid transparent;
+  background-color: rgba(128, 128, 128, 0.404);
+  color: white;
+  transition: all ease .3s;
+}
+
+.btn-card:hover {
+  color: rgb(230, 96, 96);
+}

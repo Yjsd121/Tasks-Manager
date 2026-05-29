@@ -1,33 +1,16 @@
 import './Viewtask.css'
 import { Barnav } from '../components/barnav/barnav'
 import { tasks } from '../static/Tasks'
-
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
+import { Searchfilters } from '../components/search-filters/filtersBar'
+import { getcolor } from '../static/getcolor'
+import { Minichart } from '../components/minichart/minichart'
 export function Viewtask() {
-  const getcolor = (valor) => {
-    if (valor === 'pending') {
-      return {
-        bgTitle: '#f34a4a',
-        bgcard: '#ffeaea',
-        shadow: 'rgba(243, 74, 74, 0.5)'
-      }
-    } else if (valor === 'in-progress') {
-      return {
-        bgTitle: '#eebe22fa',
-        bgcard: '#fcf6e2fa',
-        shadow: 'rgba(238, 190, 34, 0.5)'
-      }
-    } else {
-      return {
-        bgTitle: '#48c528fa',
-        bgcard: '#e8ffe2fa',
-        shadow: 'rgba(71, 219, 34, 0.5)'
-      }
-    }
-  }
-
   return (
     <main>
       <Barnav />
+      <Minichart />
+      <Searchfilters />
       <section className='Tasks-container'>
         {
           tasks.map(item => {
@@ -72,7 +55,7 @@ export function Viewtask() {
                     <input type='radio' />
                     <p>Marcar</p>
                   </div>
-                  <button>Borrar</button>
+                  <button className='btn-card'><DeleteForeverOutlinedIcon /></button>
                 </div>
               </section>
             )
