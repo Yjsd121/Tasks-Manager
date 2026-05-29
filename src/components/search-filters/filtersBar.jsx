@@ -1,6 +1,7 @@
 import './filterBar.css'
 import { useState } from 'react'
-export function Searchfilters() {
+
+export function Searchfilters({ showmodal, setshow }) {
   const [filter, setFilter] = useState('all')
   const filters = [
     'all',
@@ -29,7 +30,7 @@ export function Searchfilters() {
         }
       </div>
       <div className='search-container'>
-        <button>Nueva Tarea</button>
+        <button onClick={() => { setshow(!showmodal) }}>Nueva Tarea</button>
       </div>
     </section>
   )

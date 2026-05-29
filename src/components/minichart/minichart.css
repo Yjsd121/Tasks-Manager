@@ -5,3 +5,21 @@
   gap: 1.5rem;
   padding: 10px;
 }
+
+.chart {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart h3 {
+  border-bottom: solid 2px rgb(209, 205, 205);
+}
+
+.chart p {
+  font-size: 1.7rem;
+}

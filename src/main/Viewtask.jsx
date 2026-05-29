@@ -1,16 +1,19 @@
 import './Viewtask.css'
 import { Barnav } from '../components/barnav/barnav'
-import { tasks } from '../static/Tasks'
+import { tasks } from '../mock/Tasks'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import { Searchfilters } from '../components/search-filters/filtersBar'
 import { getcolor } from '../static/getcolor'
 import { Minichart } from '../components/minichart/minichart'
+import { Modal } from '../components/modal/modal'
+import { useState } from 'react'
 export function Viewtask() {
+  const [showmodal, setshow] = useState(false)
   return (
     <main>
       <Barnav />
       <Minichart />
-      <Searchfilters />
+      <Searchfilters showmodal={showmodal} setshow={setshow} />
       <section className='Tasks-container'>
         {
           tasks.map(item => {
@@ -62,7 +65,13 @@ export function Viewtask() {
           })
         }
       </section>
-
+      {
+        showmodal &&
+          <Modal>
+            <h1>hola</h1>
+            <button onClick={() => { setshow(!showmodal) }}>cerrar</button>
+          </Modal>
+      }
     </main>
   )
 }
