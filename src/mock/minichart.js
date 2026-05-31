@@ -21,6 +21,6 @@ export const stats = [
     id: 4,
     title: 'Completed',
     quantity: 7,
-    color: '#2bda6b'
+    color: '#2bd342'
   }
 ]

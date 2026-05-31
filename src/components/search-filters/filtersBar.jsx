@@ -30,7 +30,7 @@ export function Searchfilters({ showmodal, setshow }) {
         }
       </div>
       <div className='search-container'>
-        <button onClick={() => { setshow(!showmodal) }}>Nueva Tarea</button>
+        <button onClick={() => { setshow(!showmodal) }}>Add new task</button>
       </div>
     </section>
   )

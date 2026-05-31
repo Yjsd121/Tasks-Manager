@@ -1,11 +1,11 @@
 export function getcolor(valor) {
-  if (valor === 'pending') {
+  if (valor === 'high') {
     return {
       bgTitle: '#f34a4a',
       bgcard: '#ffeaea',
       shadow: 'rgba(243, 74, 74, 0.5)'
     }
-  } else if (valor === 'in-progress') {
+  } else if (valor === 'medium') {
     return {
       bgTitle: '#eebe22fa',
       bgcard: '#fcf6e2fa',
