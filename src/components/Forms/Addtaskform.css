@@ -1,0 +1,42 @@
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 0.5rem;
+}
+
+form p {
+  font-size: 20px;
+}
+form input {
+  border-radius: 5px;
+  padding-left: 5px;
+  outline: none;
+}
+
+form textarea {
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
+  border-radius: 10px;
+  padding-left: 5px;
+  outline: none;
+}
+
+.inputTime {
+  height: 53px;
+  border-radius: 5px;
+  border: solid 1px rgb(184, 181, 181);
+}
+
+.btn-conntainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-conntainer button {
+  width: 150px;
+  height: 40px;
+  background-color: transparent;
+  border: solid 2px rgb(212, 210, 210);
+}

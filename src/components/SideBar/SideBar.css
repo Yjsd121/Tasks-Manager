@@ -1,0 +1,19 @@
+.SideBar-container {
+  height: 100dvh;
+  width: 200px;
+  background-color: aqua;
+}
+
+.SideBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.Logo {
+  display: flex;
+  flex-direction: column  ;
+  justify-content: center;
+  align-items: center;
+}
