@@ -1,0 +1,29 @@
+.AdminView-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.container {
+  width: 100%;
+}
+
+.Title-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Title-container button {
+  width: 150px;
+  background-color: rgb(186, 122, 247);
+  outline: none;
+  border: solid 2px rgb(157, 53, 253);
+  box-shadow: 0px 3px 0 0 rgba(157, 53, 253,.5);
+  transition: all .3s ease;
+}
+
+.Title-container button:active {
+  box-shadow: 0px 0px 0 0 rgba(157, 53, 253,.5);
+  transform: translateY(3px);
+}
