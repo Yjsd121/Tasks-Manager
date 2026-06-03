@@ -1,0 +1,115 @@
+.AdminView-container {
+  display: flex;
+  flex-direction: row;
+  background-color: #f4f5fb;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.Title-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Title-container button {
+  width: 150px;
+  background-color: #7b7fcb;
+  outline: none;
+  border: solid 3px rgb(114, 117, 189);
+  box-shadow: 0px 3px 0 0 rgba(114, 117, 189, .8);
+  transition: all .3s ease;
+  color: white;
+}
+
+.Title-container button:hover {
+  background-color: #6a6eba;
+}
+.Title-container button:active {
+  box-shadow: 0px 0px 0 0 rgba(157, 53, 253, .5);
+  transform: translateY(3px);
+}
+
+.table-container {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+
+.users-table {
+  width: 60%;
+  border-collapse: collapse;
+  background: rgb(255, 255, 255);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+}
+
+.users-table thead {
+  background: #e0e0e0;
+}
+
+.users-table th {
+  text-align: left;
+  padding: 16px;
+  font-size: .8rem;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.users-table td {
+  padding: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.users-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.role {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: .8rem;
+}
+
+.role.Admin {
+  background: #f3e8ff;
+  color: #9333ea;
+}
+
+.role.Usuario {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.progress-container {
+  width: 100px;
+  height: 8px;
+
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: #14b8a6;
+  border-radius: 10px;
+}
+
+.btn-table {
+  padding: 5px;
+  background-color: #cfd1d4;
+  border: solid 1px transparent;
+  transition: all .3s ease;
+}
+
+.btn-table:active {
+  scale: 1.25;
+}
