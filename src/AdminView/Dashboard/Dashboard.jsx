@@ -1,4 +1,6 @@
+import './Dashboard.css'
 import { SideBar } from '../../components/SideBar/SideBar'
+import MyChart from '../../components/barchar'
 
 export function Dashboard() {
   return (
@@ -8,13 +10,17 @@ export function Dashboard() {
         <section className='container'>
           <section className='Title-container'>
             <div className='title'>
-              <h2>Dashbaord</h2>
-              <p>performance per user</p>
+              <h2>Statistics</h2>
+              <p>Dashboard</p>
             </div>
-            <button>Add User</button>
           </section>
-          <div>
-            hola
+          <div className='Dashboard-contaier'>
+            <div>
+              <MyChart />
+            </div>
+            <div>
+              <MyChart />
+            </div>
           </div>
         </section>
       </section>

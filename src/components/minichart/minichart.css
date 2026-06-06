@@ -1,7 +1,6 @@
 .minichart-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 250px));
-  justify-content: center;
   gap: 1.5rem;
   padding: 10px;
 }

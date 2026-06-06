@@ -11,7 +11,7 @@ export function SideBar() {
       </div>
 
       <nav className='sidebar-nav'>
-        <NavLink to='/AdminView/Dashboard'><h3>Dashboard</h3></NavLink>
+        <NavLink to='/AdminView/Dashboard'><h3>Statistics</h3></NavLink>
         <NavLink to='/AdminView/User'><h3>User</h3></NavLink>
       </nav>
 

@@ -16,11 +16,5 @@ export const stats = [
     title: 'In Progress',
     quantity: 4,
     color: '#f5ab2c'
-  },
-  {
-    id: 4,
-    title: 'Completed',
-    quantity: 7,
-    color: '#2bd342'
   }
 ]

@@ -42,7 +42,7 @@ export function UsersTable({ users }) {
                   {progress} %
                 </td>
                 <td>
-                  <button className='btn-table'>edit</button>
+                  <button className='btn-table' onClick={() => { }}>edit</button>
                 </td>
               </tr>
             )

@@ -11,15 +11,17 @@ export function AdminView() {
       <section className='AdminView-container'>
         <SideBar />
         <section className='container'>
-          <section className='Title-container'>
+          <div className='contaier-style'>
             <div className='title'>
               <h2>Users Manage</h2>
               <p>{totalusers} registered users in total</p>
             </div>
             <button>Add User</button>
-          </section>
+
+          </div>
           <Minichart />
           <UsersTable users={users} />
+
         </section>
       </section>
     </section>
