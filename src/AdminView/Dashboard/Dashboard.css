@@ -1,6 +1,80 @@
-.Dashboard-contaier {
+.Dashboard-layout {
+  display: flex;
+  height: 100vh;
+  background: #f4f5fb;
+}
+
+.dashboard-content {
+  flex: 1;
+  display: flex;
+  padding: 0 24px;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dashboard-header {
+  background: white;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+}
+
+.dashboard-title h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.dashboard-title p {
+  margin-top: 4px;
+  color: #7c8599;
+}
+
+.dashboard-stats {
+  width: 100%;
+}
+
+.charts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.chart-card {
+  background: white;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+  overflow: hidden;
+}
+
+.minicards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 2fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.minicard {
+  background-color: white;
   padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 50px;
+}
+
+.tiitle-tasks {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tasks-cont {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: .4rem;
+  font-size: .8rem;
 }
