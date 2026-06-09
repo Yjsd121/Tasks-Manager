@@ -1,4 +1,4 @@
-const connection = require('./dbConnection.js')
+const connection = require('./bdConnection.js')
 
 function Query (sql, params = []) {
   return new Promise((resolve, reject) => {
