@@ -1,5 +1,5 @@
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
-import { getcolor } from '../static/getcolor'
+import { getcolor } from '@/static/getcolor'
 import Checkbox from '@mui/material/Checkbox'
 
 export function Tasksmap({ tasks }) {

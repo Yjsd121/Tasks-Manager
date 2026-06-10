@@ -1,14 +1,16 @@
 import './Viewtask.css'
-import { Barnav } from '../components/barnav/barnav'
-import { tasks } from '../mock/Tasks'
-import { Searchfilters } from '../components/search-filters/filtersBar'
-import { Minichart } from '../components/minichart/minichart'
-import { Modal } from '../components/modal/modal'
 import { useState } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
-import { AddTask } from './forms/Addtaskform'
-import { Tasksmap } from './taskmap'
 
+import { Barnav } from '@/main/components/barnav/barnav'
+import { Searchfilters } from '@/components/search-filters/filtersBar'
+import { Minichart } from '@/components/minichart/minichart'
+import { Modal } from '@/components/modal/modal'
+
+import { AddTask } from '@/main/forms/Addtaskform'
+import { Tasksmap } from '@/main/utils/taskmap'
+
+import { tasks } from '@/mock/Tasks'
 export function Viewtask() {
   const [showmodal, setshow] = useState(false)
   const hastask = tasks?.length > 0

@@ -1,11 +1,12 @@
 import './Dashboard.css'
-import { SideBar } from '../../components/SideBar/SideBar'
-import MyChart from '../../components/barchar'
-import { Minichart } from '../../components/minichart/minichart'
 
-import { taskStatusData } from '../../mock/Taskschart.js'
-import { employeeCompletedTasks } from '../../mock/userscompleted.js'
-import { usersMiniCards } from '../../mock/userdata2.js'
+import { SideBar } from '../../components/SideBar/SideBar.jsx'
+import MyChart from '../../components/barchar.jsx'
+import { Minichart } from '../../../components/minichart/minichart.jsx'
+
+import { taskStatusData } from '../../../mock/Taskschart.js'
+import { employeeCompletedTasks } from '../../../mock/userscompleted.js'
+import { usersMiniCards } from '../../../mock/userdata2.js'
 
 export function Dashboard() {
   return (
