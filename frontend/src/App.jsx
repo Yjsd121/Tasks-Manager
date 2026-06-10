@@ -2,8 +2,8 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Login } from './login/login'
 import { Viewtask } from './main/Viewtask'
-import { AdminView } from './AdminView/UserView/AdminView'
-import { Dashboard } from './AdminView/Dashboard/Dashboard'
+import { AdminView } from './AdminView/pages/UserView/AdminView'
+import { Dashboard } from './AdminView/pages/Dashboard/Dashboard'
 
 export function App() {
   return (

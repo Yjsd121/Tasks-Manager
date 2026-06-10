@@ -1,10 +1,10 @@
-import { Minichart } from '../../components/minichart/minichart'
-import { SideBar } from '../../components/SideBar/SideBar'
-import { UsersTable } from '../../components/table/Table'
+import { Minichart } from '@/components/minichart/minichart'
+import { SideBar } from '@/AdminView/components/SideBar/SideBar'
+import { UsersTable } from '@/AdminView/components/table/Table'
 import './AdminView.css'
-import { users } from '../../mock/userdata'
+import { users } from '@/mock/userdata'
 import { useState } from 'react'
-import { Modal } from '../../components/modal/modal'
+import { Modal } from '@/components/modal/modal'
 
 export function AdminView() {
   const totalusers = users.length
