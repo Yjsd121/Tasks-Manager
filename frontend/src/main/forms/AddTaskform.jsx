@@ -6,44 +6,98 @@ import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import './AddTaskform.css'
 
-export function AddTask() {
-  const [age, setAge] = React.useState('')
+const initialTask = {
+  title: '',
+  description: '',
+  priority: '',
+  assignedTo: '',
+  createat: '',
+  dueDate: '',
+  status: 'pending'
+}
+
+function formatDateInput(date) {
+  if (!date) return ''
+  return String(date).split('T')[0]
+}
+
+export function AddTask({ task, onCancel, onSave }) {
+  const [formData, setFormData] = React.useState({
+    ...initialTask,
+    ...task,
+    dueDate: formatDateInput(task?.dueDate)
+  })
+  const [error, setError] = React.useState('')
+
+  const isEditing = Boolean(task?.id)
 
   const handleChange = (event) => {
-    setAge(event.target.value)
+    const { name, value } = event.target
+    setError('')
+    setFormData(prevTask => ({
+      ...prevTask,
+      [name]: value
+    }))
   }
+
+  const handleSubmit = async(event) => {
+    event.preventDefault()
+    try {
+      await onSave(formData)
+    } catch (error) {
+      setError(error.message)
+    }
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <p>Title</p>
-      <input placeholder='Title' style={{ width: '100%' }} />
+      <input
+        name='title'
+        placeholder='Title'
+        style={{ width: '100%' }}
+        value={formData.title}
+        onChange={handleChange}
+        required
+      />
       <p>Description</p>
-      <textarea placeholder='Desciption' />
+      <textarea
+        name='description'
+        placeholder='Desciption'
+        value={formData.description}
+        onChange={handleChange}
+        required
+      />
       <div className='filters-container'>
         <Box sx={{ minWidth: 120 }}>
-          <FormControl fullWidth>
+          <FormControl fullWidth required>
             <InputLabel id='demo-simple-select-label'>Priority</InputLabel>
             <Select
               labelId='demo-simple-select-label'
               id='demo-simple-select'
-              value={age}
+              name='priority'
+              value={formData.priority}
               label='Priority'
               onChange={handleChange}
+              required
             >
               <MenuItem value='high'>high</MenuItem>
-              <MenuItem value='midium'>midium</MenuItem>
+              <MenuItem value='medium'>medium</MenuItem>
               <MenuItem value='low'>low</MenuItem>
             </Select>
           </FormControl>
         </Box>
         <Box sx={{ minWidth: 120 }}>
-          <FormControl fullWidth>
+          <FormControl fullWidth required>
             <InputLabel id='demo-simple-select-label'>Asigned to</InputLabel>
             <Select
               labelId='demo-simple-select-label'
               id='demo-simple-select'
-              value={age}
+              name='assignedTo'
+              value={formData.assignedTo}
               label='Asigned to'
               onChange={handleChange}
+              required
             >
               <MenuItem value='yader'>yader</MenuItem>
               <MenuItem value='Carlos'>Carlos</MenuItem>
@@ -51,11 +105,19 @@ export function AddTask() {
             </Select>
           </FormControl>
         </Box>
-        <input className='inputTime' type='date' />
+        <input
+          className='inputTime'
+          name='dueDate'
+          type='date'
+          value={formData.dueDate}
+          onChange={handleChange}
+          required
+        />
       </div>
+      {error && <p className='form-error'>{error}</p>}
       <div className='btn-conntainer'>
-        <button>cancel</button>
-        <button>send</button>
+        <button type='button' onClick={onCancel}>cancel</button>
+        <button type='submit'>{isEditing ? 'update' : 'send'}</button>
       </div>
     </form>
   )
