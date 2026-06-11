@@ -41,3 +41,9 @@ form textarea {
   background-color: transparent;
   border: solid 2px rgb(212, 210, 210);
 }
+
+.form-error {
+  color: rgb(185, 28, 28);
+  font-size: 14px;
+  font-weight: 600;
+}

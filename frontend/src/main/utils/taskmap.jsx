@@ -1,8 +1,9 @@
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import { getcolor } from '@/static/getcolor'
 import Checkbox from '@mui/material/Checkbox'
 
-export function Tasksmap({ tasks }) {
+export function Tasksmap({ tasks, onDelete, onEdit }) {
   return (
     <section className='Tasks-container'>
       {
@@ -51,7 +52,18 @@ export function Tasksmap({ tasks }) {
                   <Checkbox onClick={() => { console.log('hola') }} />
                   <p>Marck</p>
                 </div>
-                <button className='btn-card'><DeleteForeverOutlinedIcon /></button>
+                <div style={{
+                  display: 'flex',
+                  gap: '1rem'
+                }}
+                >
+                  <button className='btn-card' onClick={() => onEdit(item)}>
+                    <EditOutlinedIcon />
+                  </button>
+                  <button className='btn-card' onClick={() => onDelete(item.id)}>
+                    <DeleteForeverOutlinedIcon />
+                  </button>
+                </div>
               </div>
             </section>
           )

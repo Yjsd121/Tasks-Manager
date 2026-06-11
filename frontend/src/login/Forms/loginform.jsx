@@ -2,6 +2,7 @@ import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined'
 import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Authlogin } from '../service/Auth.service'
 
 export function Formlogin() {
   const navigate = useNavigate()
@@ -20,16 +21,7 @@ export function Formlogin() {
   async function handlesubmit(e) {
     e.preventDefault()
 
-    const response = await fetch('http://localhost:3000/Auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: formData.email,
-        password: formData.password
-      })
-    })
+    const response = await Authlogin(formData.email, formData.password)
 
     const token = await response.json()
     console.log(token)
