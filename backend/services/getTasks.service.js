@@ -2,7 +2,9 @@ const Query = require('../utils/Query')
 const Task = require('../models/Task')
 
 exports.gettasks = async () => {
-  return await Query('SELECT * FROM tasks')
+  return await Query(
+    'SELECT `id`, `Task_id`, `title`, `priority`, `Status` AS status, `Description` AS description, `Createdby` AS createdBy, `Assignedto` AS assignedTo, `Createat` AS createdAt, `dueDate` FROM tasks'
+  )
 }
 
 exports.createtask = async (taskData, user) => {
@@ -10,7 +12,8 @@ exports.createtask = async (taskData, user) => {
   const task = new Task({
     ...taskData,
     taskId: Task.buildTaskId(nextId),
-    createdBy: user?.email || user?.id || null
+    createdBy: user?.email || user?.id || null,
+    createat: new Date()
   })
   const errors = task.validate()
 
@@ -19,7 +22,7 @@ exports.createtask = async (taskData, user) => {
   }
 
   const result = await Query(
-    'INSERT INTO tasks (Task_id, title, description, status, priority, assignedTo, createdBy, dueDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+    'INSERT INTO tasks (`Task_id`, `title`, `priority`, `Status`, `Description`, `Createdby`, `Assignedto`, `Createat`, `dueDate`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
     task.toCreateParams()
   )
 
@@ -55,7 +58,10 @@ exports.deletetask = async (id) => {
 }
 
 exports.gettaskbyid = async (id) => {
-  const rows = await Query('SELECT * FROM tasks WHERE id = ?', [id])
+  const rows = await Query(
+    'SELECT `id`, `Task_id`, `title`, `priority`, `Status` AS status, `Description` AS description, `Createdby` AS createdBy, `Assignedto` AS assignedTo, `Createat` AS createdAt, `dueDate` FROM tasks WHERE id = ?',
+    [id]
+  )
   return rows[0]
 }
 

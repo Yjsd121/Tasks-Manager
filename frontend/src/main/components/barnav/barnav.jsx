@@ -23,7 +23,7 @@ export function Barnav() {
             <AccountCircleOutlinedIcon />
             <p>Profile</p>
           </NavLink>
-          <NavLink to='/' className='link'>
+          <NavLink to='/' onClick={() => { window.localStorage.clear() }} className='link'>
             <LogoutOutlinedIcon />
             <p>Logout</p>
           </NavLink>

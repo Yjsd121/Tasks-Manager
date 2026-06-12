@@ -1,13 +1,29 @@
 class Task {
-  constructor({ taskId = null, title, description, priority, assignedTo, dueDate, status = 'pending', createdBy = null }) {
+  constructor({
+    taskId = null,
+    title,
+    description,
+    Description,
+    priority,
+    assignedTo,
+    Assignedto,
+    dueDate,
+    createAt = new Date(),
+    createat,
+    status = 'pending',
+    Status,
+    createdBy = null,
+    Createdby = null
+  }) {
     this.taskId = taskId
     this.title = title?.trim()
-    this.description = description?.trim()
+    this.description = (description || Description)?.trim()
     this.priority = priority
-    this.assignedTo = assignedTo
+    this.assignedTo = assignedTo || Assignedto
     this.dueDate = dueDate
-    this.status = status || 'pending'
-    this.createdBy = createdBy
+    this.createAt = createat || createAt
+    this.status = Status || status || 'pending'
+    this.createdBy = createdBy || Createdby
   }
 
   validate() {
@@ -26,27 +42,43 @@ class Task {
     return [
       this.taskId,
       this.title,
-      this.description,
-      this.status,
       this.priority,
-      this.assignedTo,
+      this.status,
+      this.description,
       this.createdBy,
+      this.assignedTo,
+      this.createAt,
       this.dueDate
     ]
   }
 
   static buildTaskId(number) {
-    return `task_${String(number).padStart(3, '0')}`
+    return `TASK-${String(number).padStart(3, '0')}`
   }
 
   static getAllowedUpdateFields() {
-    return ['title', 'description', 'status', 'priority', 'assignedTo', 'dueDate']
+    return {
+      title: 'title',
+      description: 'Description',
+      Description: 'Description',
+      status: 'Status',
+      Status: 'Status',
+      priority: 'priority',
+      assignedTo: 'Assignedto',
+      Assignedto: 'Assignedto',
+      dueDate: 'dueDate'
+    }
   }
 
   static buildUpdate(taskData) {
-    return this.getAllowedUpdateFields().reduce((updates, field) => {
+    const allowedFields = this.getAllowedUpdateFields()
+
+    return Object.keys(allowedFields).reduce((updates, field) => {
       if (taskData[field] !== undefined && taskData[field] !== '') {
-        updates[field] = typeof taskData[field] === 'string' ? taskData[field].trim() : taskData[field]
+        updates[`\`${allowedFields[field]}\``] =
+          typeof taskData[field] === 'string'
+            ? taskData[field].trim()
+            : taskData[field]
       }
 
       return updates

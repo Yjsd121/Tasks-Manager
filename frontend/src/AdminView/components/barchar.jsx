@@ -11,7 +11,7 @@ function getKeys(data) {
 }
 
 export default function MyChart({ data }) {
-  const { labelKey, valueKey } = getKeys(data)
+  const { labelKey } = getKeys(data)
   return (
     <ResponsiveContainer width='100%' height={300}>
       <BarChart data={data}>
