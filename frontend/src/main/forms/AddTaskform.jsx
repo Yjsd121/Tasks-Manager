@@ -11,10 +11,23 @@ const initialTask = {
   description: '',
   priority: '',
   assignedTo: '',
-  createat: '',
+  createdAt: '',
   dueDate: '',
   status: 'pending'
 }
+
+const assignedUsers = [
+  'Carlos',
+  'Yader',
+  'Luis',
+  'Sofia',
+  'Pedro',
+  'Ana',
+  'David',
+  'Fernanda',
+  'Jorge',
+  'Kevin'
+]
 
 function formatDateInput(date) {
   if (!date) return ''
@@ -99,9 +112,9 @@ export function AddTask({ task, onCancel, onSave }) {
               onChange={handleChange}
               required
             >
-              <MenuItem value='yader'>yader</MenuItem>
-              <MenuItem value='Carlos'>Carlos</MenuItem>
-              <MenuItem value='Kevin'>Kevin</MenuItem>
+              {assignedUsers.map(user => (
+                <MenuItem key={user} value={user}>{user}</MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Box>

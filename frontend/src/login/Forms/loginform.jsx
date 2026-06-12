@@ -24,12 +24,18 @@ export function Formlogin() {
     const response = await Authlogin(formData.email, formData.password)
 
     const token = await response.json()
-    console.log(token)
 
     window.localStorage.setItem('token', token.token)
+    window.localStorage.setItem('user', JSON.stringify({
+      email: token.email,
+      id: token.id,
+      role: token.role
+    }))
 
-    if (token.token) {
+    if (token.token && token.role === 'user') {
       navigate('/tasksview')
+    } else if (token.token && token.role === 'admin') {
+      navigate('/AdminView/Dashboard')
     }
   }
   return (

@@ -9,6 +9,7 @@ import { Modal } from '@/components/modal/modal'
 
 import { AddTask } from '@/main/forms/AddTaskform'
 import { Tasksmap } from '@/main/utils/taskmap'
+import { useNavigate } from 'react-router-dom'
 
 export function Viewtask() {
   const [showmodal, setshow] = useState(false)
@@ -20,6 +21,7 @@ export function Viewtask() {
   const hastask = Tasksdata?.length > 0
   const token = window.localStorage.getItem('token')
 
+  const navigate = useNavigate()
   async function gettasks() {
     try {
       const response = await fetch('http://localhost:3000/tasksview', {
@@ -31,10 +33,14 @@ export function Viewtask() {
       })
 
       if (!response.ok) {
+        if (response.statusText === 'Unauthorized') {
+          navigate('/')
+        }
         throw new Error('Error fetching tasks')
       }
 
       const data = await response.json()
+
       return data.data
     } catch (error) {
       console.error(error)

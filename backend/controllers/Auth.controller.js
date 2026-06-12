@@ -2,6 +2,7 @@ const authservices = require('../services/Auth.service')
 const jwt = require('jsonwebtoken')
 
 exports.authlogin = async (req, res) => {
+  console.log(req.user)
   try {
     const { email, password } = req.body
     const user = await authservices.getusers(email)
@@ -17,7 +18,8 @@ exports.authlogin = async (req, res) => {
     } else {
       const token = jwt.sign({
         id: user[0].Client_id,
-        email: user[0].User_email
+        email: user[0].User_email,
+        role: user[0].Role
       },
         process.env.JWT_SECRET,
         {
@@ -26,7 +28,10 @@ exports.authlogin = async (req, res) => {
       )
       return res.json({
         ok: true,
-        token
+        token,
+        id: user[0].Client_id,
+        email: user[0].User_email,
+        role: user[0].Role
       })
     }
   } catch (err) {
