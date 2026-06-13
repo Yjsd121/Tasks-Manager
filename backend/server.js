@@ -10,7 +10,8 @@ app.use(express.json())
 
 app.use('/Auth', require('./Routes/Auth.routes'))
 app.use(authmiddleware)
-app.use('/tasksview',require('./Routes/tasks.routes'))
+app.use('/tasksview', require('./Routes/tasks.routes'))
+app.use('/Adminview', require('./Routes/user.routes'))
 
 app.listen(port, () => {
   console.log(`Server listen in http://localhost:${port}`)

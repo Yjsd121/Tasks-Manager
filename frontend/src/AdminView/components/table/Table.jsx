@@ -16,22 +16,22 @@ export function UsersTable({ users }) {
         <tbody>
           {users.map(user => {
             const progress =
-              user.assigned === 0
+              user.assigned_tasks === 0
                 ? 0
                 : Math.round(
-                  (user.completed / user.assigned) * 100
+                  (user.completed_tasks / user.assigned_tasks) * 100
                 )
 
             return (
-              <tr key={user.id}>
-                <td>{user.name}</td>
+              <tr key={user.Client_id}>
+                <td>{user.User_names}</td>
                 <td>
-                  <span className={`role ${user.role}`}>
-                    {user.role}
+                  <span className={`role ${user.Role}`}>
+                    {user.Role}
                   </span>
                 </td>
-                <td>{user.assigned}</td>
-                <td>{user.completed}</td>
+                <td>{user.assigned_tasks}</td>
+                <td>{user.completed_tasks}</td>
                 <td>
                   <div className='progress-container'>
                     <div
