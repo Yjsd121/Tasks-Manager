@@ -30,7 +30,8 @@ exports.authlogin = async (req, res) => {
         token,
         id: user[0].Client_id,
         email: user[0].User_email,
-        role: user[0].Role
+        role: user[0].Role,
+        name: user[0].User_names
       })
     }
   } catch (err) {

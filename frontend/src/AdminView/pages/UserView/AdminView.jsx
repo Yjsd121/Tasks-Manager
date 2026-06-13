@@ -10,6 +10,7 @@ export function AdminView() {
   const [data, setdata] = useState([])
   const token = window.localStorage.getItem('token')
   const navigate = useNavigate()
+
   async function getusers() {
     const response = await fetch('http://localhost:3000/Adminview/users', {
       method: 'GET',
