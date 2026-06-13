@@ -105,12 +105,12 @@
   font-size: .8rem;
 }
 
-.role.Admin {
+.role.admin {
   background: #f3e8ff;
   color: #9333ea;
 }
 
-.role.Usuario {
+.role.user {
   background: #dbeafe;
   color: #2563eb;
 }

@@ -2,7 +2,6 @@ const authservices = require('../services/Auth.service')
 const jwt = require('jsonwebtoken')
 
 exports.authlogin = async (req, res) => {
-  console.log(req.user)
   try {
     const { email, password } = req.body
     const user = await authservices.getusers(email)
