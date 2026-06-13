@@ -3,9 +3,11 @@ import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Authlogin } from '../service/Auth.service'
+import { UserDcontext } from '../../context/usercontext'
 
 export function Formlogin() {
   const navigate = useNavigate()
+  const { UserData, setUserData } = UserDcontext()
   const [formData, setformData] = useState({
     email: '',
     password: ''
@@ -29,9 +31,16 @@ export function Formlogin() {
     window.localStorage.setItem('user', JSON.stringify({
       email: token.email,
       id: token.id,
-      role: token.role
+      role: token.role,
+      name: token.name
     }))
 
+    setUserData({
+      ...UserData,
+      email: token.email,
+      role: token.role,
+      name: token.name
+    })
     if (token.token && token.role === 'user') {
       navigate('/tasksview')
     } else if (token.token && token.role === 'admin') {
