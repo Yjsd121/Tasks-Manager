@@ -7,6 +7,7 @@ const authmiddleware = require('./middlewares/Auth.middleware')
 
 app.use(cors())
 app.use(express.json())
+app.use('/uploads', express.static('uploads'));
 
 app.use('/Auth', require('./Routes/Auth.routes'))
 app.use(authmiddleware)

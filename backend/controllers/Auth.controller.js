@@ -31,7 +31,8 @@ exports.authlogin = async (req, res) => {
         id: user[0].Client_id,
         email: user[0].User_email,
         role: user[0].Role,
-        name: user[0].User_names
+        name: user[0].User_names,
+        img: user[0].Img_rute
       })
     }
   } catch (err) {
