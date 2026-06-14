@@ -1,9 +1,8 @@
 import { NavLink } from 'react-router-dom'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined'
 import './barnav.css'
-import { UserDcontext } from '../../../context/usercontext'
+import { UserDcontext } from '@/context/usercontext'
 import { useEffect } from 'react'
 
 export function Barnav() {
@@ -17,11 +16,13 @@ export function Barnav() {
         ...UserData,
         email: user.email,
         role: user.role,
-        name: user.name
+        name: user.name,
+        Img: user.Img
       })
     }
     loaddata()
   }, [])
+
   return (
     <>
       <section className='barnav'>
@@ -37,7 +38,13 @@ export function Barnav() {
             <p>Tasks</p>
           </NavLink>
           <NavLink className='link'>
-            <AccountCircleOutlinedIcon />
+            <img
+              style={{
+                width: '35px'
+              }}
+              src={`http://localhost:3000/uploads/${UserData.Img}`}
+              alt='xd'
+            />
             <p>{UserData.name}</p>
           </NavLink>
           <NavLink to='/' onClick={() => { window.localStorage.clear() }} className='link'>

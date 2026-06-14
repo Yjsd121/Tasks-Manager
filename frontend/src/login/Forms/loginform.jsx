@@ -32,14 +32,16 @@ export function Formlogin() {
       email: token.email,
       id: token.id,
       role: token.role,
-      name: token.name
+      name: token.name,
+      Img: token.img
     }))
 
     setUserData({
       ...UserData,
       email: token.email,
       role: token.role,
-      name: token.name
+      name: token.name,
+      Img: token.img
     })
     if (token.token && token.role === 'user') {
       navigate('/tasksview')
