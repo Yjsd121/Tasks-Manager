@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
 
 import { Barnav } from '@/main/components/barnav/barnav'
-import { Searchfilters } from '@/components/search-filters/filtersBar'
+import { Searchfilters } from '../components/search-filters/filtersBar'
 import { Minichart } from '@/components/minichart/minichart'
 import { Modal } from '@/components/modal/modal'
 
@@ -12,6 +12,8 @@ import { Tasksmap } from '@/main/utils/taskmap'
 import { useNavigate } from 'react-router-dom'
 
 export function Viewtask() {
+  const [filter, setFilter] = useState('all')
+
   const [showmodal, setshow] = useState(false)
   const [selectedTask, setSelectedTask] = useState(null)
 
@@ -22,9 +24,11 @@ export function Viewtask() {
   const token = window.localStorage.getItem('token')
 
   const navigate = useNavigate()
+  // I need separe this in another folder
   async function gettasks() {
     try {
-      const response = await fetch('http://localhost:3000/tasksview', {
+      const user = JSON.parse(window.localStorage.getItem('user'))
+      const response = await fetch(`http://localhost:3000/tasksview/${user.name}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -35,6 +39,7 @@ export function Viewtask() {
       if (!response.ok) {
         if (response.statusText === 'Unauthorized') {
           navigate('/')
+          window.localStorage.clear()
         }
         throw new Error('Error fetching tasks')
       }
@@ -122,12 +127,14 @@ export function Viewtask() {
           setSelectedTask(null)
           setshow(value)
         }}
+        filter={filter}
+        setFilter={setFilter}
       />
       {
         loading && <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}><CircularProgress color='white' /></div>
       }
       {
-        !loading && hastask && <Tasksmap tasks={Tasksdata} onDelete={deleteTask} onEdit={openEditModal} />
+        !loading && hastask && <Tasksmap tasks={Tasksdata} onDelete={deleteTask} onEdit={openEditModal} filter={filter} />
       }
       {
         !loading && !hastask && <p style={{ textAlign: 'center' }}>Sin tareas</p>

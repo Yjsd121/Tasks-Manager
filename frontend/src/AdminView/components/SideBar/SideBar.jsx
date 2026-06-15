@@ -14,6 +14,7 @@ export function SideBar() {
       <nav className='sidebar-nav'>
         <NavLink to='/AdminView/Dashboard'><h3>Statistics</h3></NavLink>
         <NavLink to='/AdminView/User'><h3>User</h3></NavLink>
+        <NavLink to='/AdminView/Mytasks'><h3>Mytasks</h3></NavLink>
       </nav>
 
       <div className='sidebar-footer'>

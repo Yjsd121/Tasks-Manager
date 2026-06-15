@@ -1,8 +1,6 @@
 import './filterBar.css'
-import { useState } from 'react'
 
-export function Searchfilters({ showmodal, setshow }) {
-  const [filter, setFilter] = useState('all')
+export function Searchfilters({ showmodal, setshow, filter, setFilter }) {
   const filters = [
     'all',
     'pending',
