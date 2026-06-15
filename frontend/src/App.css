@@ -33,7 +33,7 @@ input {
 
 .primary-button {
   border: 2px solid transparent;
-  border-color: #ffffff;
+  border-color: rgb(255, 255, 255);
   background-color: #7b7fcb;
   color: #fcfcfc;
 }

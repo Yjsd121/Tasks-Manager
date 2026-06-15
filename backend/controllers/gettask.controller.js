@@ -2,7 +2,7 @@ const tasksservice = require('../services/getTasks.service')
 
 exports.gettasks = async (req, res) => {
   try {
-    const data = await tasksservice.gettasks()
+    const data = await tasksservice.gettasks(req.params.name)
 
     if (data.length === 0) {
       return res.status(404).json({

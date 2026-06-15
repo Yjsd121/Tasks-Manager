@@ -1,9 +1,10 @@
 const Query = require('../utils/Query')
 const Task = require('../models/Task')
 
-exports.gettasks = async () => {
+exports.gettasks = async (name) => {
   return await Query(
-    'SELECT `id`, `Task_id`, `title`, `priority`, `Status` AS status, `Description` AS description, `Createdby` AS createdBy, `Assignedto` AS assignedTo, `Createat` AS createdAt, `dueDate` FROM tasks'
+    'SELECT `id`, `Task_id`, `title`, `priority`, `Status` AS status, `Description` AS description, `Createdby` AS createdBy, `Assignedto` AS assignedTo, `Createat` AS createdAt, `dueDate` FROM tasks WHERE AssignedTo = ?',
+    [name]
   )
 }
 
@@ -58,11 +59,10 @@ exports.deletetask = async (id) => {
 }
 
 exports.gettaskbyid = async (id) => {
-  const rows = await Query(
-    'SELECT `id`, `Task_id`, `title`, `priority`, `Status` AS status, `Description` AS description, `Createdby` AS createdBy, `Assignedto` AS assignedTo, `Createat` AS createdAt, `dueDate` FROM tasks WHERE id = ?',
+  return await Query(
+    'SELECT `id`, `Task_id`, `title`, `priority`, `Status` AS status, `Description` AS description, `Createdby` AS createdBy, `Assignedto` AS assignedTo, `Createat` AS createdAt, `dueDate` FROM tasks WHERE AssignedTo = ?',
     [id]
   )
-  return rows[0]
 }
 
 exports.getnextautoincrement = async () => {

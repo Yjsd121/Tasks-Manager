@@ -26,7 +26,8 @@ const assignedUsers = [
   'David',
   'Fernanda',
   'Jorge',
-  'Kevin'
+  'Kevin',
+  'Jose'
 ]
 
 function formatDateInput(date) {

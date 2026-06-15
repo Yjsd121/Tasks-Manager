@@ -11,7 +11,6 @@ export function Barnav() {
   useEffect(() => {
     function loaddata() {
       const user = JSON.parse(window.localStorage.getItem('user'))
-      console.log(user)
       setUserData({
         ...UserData,
         email: user.email,
