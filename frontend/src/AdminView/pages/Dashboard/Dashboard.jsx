@@ -2,7 +2,6 @@ import './Dashboard.css'
 
 import { SideBar } from '../../components/SideBar/SideBar.jsx'
 import MyChart from '../../components/barchar.jsx'
-import { Minichart } from '../../../components/minichart/minichart.jsx'
 
 import { taskStatusData } from '../../../mock/Taskschart.js'
 import { employeeCompletedTasks } from '../../../mock/userscompleted.js'
@@ -18,10 +17,6 @@ export function Dashboard() {
             <h2>Statistics</h2>
             <p>Dashboard overview</p>
           </div>
-        </section>
-
-        <section className='dashboard-stats'>
-          <Minichart />
         </section>
 
         <section className='charts-grid'>

@@ -1,6 +1,6 @@
 import './minichart.css'
-import { stats } from '@/mock/minichart'
-export function Minichart() {
+
+export function Minichart({ stats = [] }) {
   return (
     <section className='minichart-container'>
       {
