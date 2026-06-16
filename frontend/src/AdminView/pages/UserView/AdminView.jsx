@@ -1,4 +1,3 @@
-import { Minichart } from '@/components/minichart/minichart'
 import { SideBar } from '@/AdminView/components/SideBar/SideBar'
 import { UsersTable } from '@/AdminView/components/table/Table'
 import './AdminView.css'
@@ -55,10 +54,6 @@ export function AdminView() {
           <button onClick={() => { setshow(true) }} className='btn-add-user'>
             Nuevo Usuario
           </button>
-        </section>
-
-        <section className='stats-section'>
-          <Minichart />
         </section>
 
         <section className='table-section'>
