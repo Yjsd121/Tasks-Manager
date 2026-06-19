@@ -136,7 +136,11 @@ export function Tasksx() {
       {
         showmodal && (
           <Modal>
-            <AddTask task={selectedTask} onCancel={closeModal} onSave={saveTask} />
+            <AddTask
+              task={selectedTask}
+              onCancel={closeModal}
+              onSave={saveTask}
+            />
           </Modal>
         )
       }
