@@ -24,7 +24,6 @@ const assignedUsers = [
   'Pedro',
   'Ana',
   'David',
-  'Fernanda',
   'Jorge',
   'Kevin',
   'Jose'
@@ -41,8 +40,8 @@ export function AddTask({ task, onCancel, onSave }) {
     ...task,
     dueDate: formatDateInput(task?.dueDate)
   })
-  const [error, setError] = React.useState('')
 
+  const [error, setError] = React.useState('')
   const isEditing = Boolean(task?.id)
 
   const handleChange = (event) => {
@@ -101,6 +100,7 @@ export function AddTask({ task, onCancel, onSave }) {
             </Select>
           </FormControl>
         </Box>
+
         <Box sx={{ minWidth: 120 }}>
           <FormControl fullWidth required>
             <InputLabel id='demo-simple-select-label'>Asigned to</InputLabel>

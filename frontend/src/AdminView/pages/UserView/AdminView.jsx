@@ -4,6 +4,7 @@ import './AdminView.css'
 import { useState, useEffect } from 'react'
 import { Modal } from '@/components/modal/modal'
 import { useNavigate } from 'react-router-dom'
+import { AddUserForm } from '../../forms/Adduser'
 
 export function AdminView() {
   const [data, setdata] = useState([])
@@ -29,6 +30,7 @@ export function AdminView() {
     console.log(info)
     return info.data
   }
+
   useEffect(() => {
     async function loaddata() {
       const data = await getusers()
@@ -41,6 +43,9 @@ export function AdminView() {
   const totalusers = data.length
   const [show, setshow] = useState(false)
 
+  function CloseModal() {
+    setshow(false)
+  }
   return (
     <section className='AdminView-container'>
       <SideBar />
@@ -61,7 +66,13 @@ export function AdminView() {
         </section>
 
         {
-          show && <Modal />
+          show && (
+            <Modal>
+              <AddUserForm
+                onCancel={CloseModal}
+              />
+            </Modal>
+          )
         }
       </main>
     </section>

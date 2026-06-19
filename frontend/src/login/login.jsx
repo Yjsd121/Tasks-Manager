@@ -10,7 +10,7 @@ export function Login() {
         borderRadius: '20px'
       }}
       >
-        <img className='icon' src='TasksIcon.png' />
+        <img style={{ width: '60px' }} src='TasksIcon.png' />
       </div>
 
       <h2>Gestor de tareas</h2>
