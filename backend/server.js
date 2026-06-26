@@ -9,11 +9,11 @@ app.use(cors())
 app.use(express.json())
 app.use('/uploads', express.static('uploads'));
 
-app.use('/Auth', require('./Routes/Auth.routes'))
+app.use('/Auth', require('./Auth/Auth.routes'))
 app.use(authmiddleware)
-app.use('/tasksview', require('./Routes/tasks.routes'))
-app.use('/Adminview', require('./Routes/user.routes'))
-app.use('/Minichart', require('./Routes/minichart.routes'))
+app.use('/tasksview', require('./tasks/tasks.routes'))
+app.use('/Adminview', require('./users/user.routes'))
+app.use('/Minichart', require('./charts/Minichart/minichart.routes'))
 
 app.listen(port, () => {
   console.log(`Server listen in http://localhost:${port}`)

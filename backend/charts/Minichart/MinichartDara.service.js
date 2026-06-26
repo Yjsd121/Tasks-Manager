@@ -1,6 +1,7 @@
-const Query = require('../utils/Query')
+const Query = require('../../utils/Query')
 
-exports.TasksInfo = async () => {
+exports.TasksInfo = async (name) => {
+
   const [result] = await Query(`
     SELECT
       COUNT(t.id) AS total,
@@ -8,7 +9,8 @@ exports.TasksInfo = async () => {
       SUM(CASE WHEN t.status = 'completed' THEN 1 ELSE 0 END) AS T_completed,
       SUM(CASE WHEN t.status = 'in-progress' THEN 1 ELSE 0 END) AS T_inprogress
     FROM tasks t
-  `)
+    WHERE Assignedto = ?
+  `, [name])
 
   return [
     {

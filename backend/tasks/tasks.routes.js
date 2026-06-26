@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const controller = require('../controllers/gettask.controller')
+const controller = require('./gettask.controller')
 
 router.get('/:name', controller.gettasks)
 router.post('/', controller.createtask)
