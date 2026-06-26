@@ -3,9 +3,9 @@ import './Dashboard.css'
 import { SideBar } from '../../components/SideBar/SideBar.jsx'
 import MyChart from '../../components/barchar.jsx'
 
-import { taskStatusData } from '../../../mock/Taskschart.js'
-import { employeeCompletedTasks } from '../../../mock/userscompleted.js'
-import { usersMiniCards } from '../../../mock/userdata2.js'
+import { taskStatusData } from '@/mock/Taskschart.js'
+import { employeeCompletedTasks } from '@/mock/userscompleted.js'
+import { usersMiniCards } from '@/mock/userdata2.js'
 
 export function Dashboard() {
   return (

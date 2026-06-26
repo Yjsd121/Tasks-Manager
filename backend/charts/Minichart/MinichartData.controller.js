@@ -1,8 +1,8 @@
-const MinichartService = require('../services/MinichartDara.service')
+const MinichartService = require('./MinichartDara.service')
 
 exports.MinichartTaskview = async (req, res) => {
   try {
-    const data = await MinichartService.TasksInfo()
+    const data = await MinichartService.TasksInfo(req.params.name)
 
     if (data.length === 0) {
       return res.status(401).json({

@@ -1,6 +1,6 @@
 import './Viewtask.css'
 import { Barnav } from '@/main/components/barnav/barnav'
-import { Minichart } from '@/components/minichart/minichart'
+import { Minichart } from './components/minichart/minichart'
 import { Tasksx } from '@/components/Tasks/Tasksx'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -11,7 +11,8 @@ export function Viewtask() {
   async function MiniData() {
     try {
       const token = window.localStorage.getItem('token')
-      const response = await fetch('http://localhost:3000/Minichart', {
+      const user = JSON.parse(window.localStorage.getItem('user'))
+      const response = await fetch(`http://localhost:3000/Minichart/${user.name}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

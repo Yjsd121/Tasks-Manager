@@ -49,6 +49,16 @@ export function Formlogin() {
       navigate('/AdminView/Dashboard')
     }
   }
+  function ShowPassword() {
+    const pass = document.getElementById('password')
+    const atributr = pass.getAttribute('type')
+    if (atributr === 'password') {
+      pass.setAttribute('type', 'text')
+    }
+    if (atributr === 'text') {
+      pass.setAttribute('type', 'password')
+    }
+  }
   return (
     <form
       className='login-container'
@@ -71,6 +81,7 @@ export function Formlogin() {
         <div className='input-style'>
           <VpnKeyOutlinedIcon className='icon' />
           <input
+            id='password'
             type='password'
             name='password'
             value={formData.password}
@@ -79,6 +90,16 @@ export function Formlogin() {
             placeholder='password'
           />
         </div>
+      </div>
+      <div style={{
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '.5rem'
+      }}
+      >
+        <input type='checkbox' id='pass' onChange={ShowPassword} />
+        Show password
       </div>
       <button type='submit' className='primary-button'>Login</button>
     </form>
