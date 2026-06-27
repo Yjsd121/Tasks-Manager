@@ -1,7 +1,7 @@
 const Query = require('../utils/Query')
 
 exports.getusers = async () => {
-    return await Query(`SELECT
+  return await Query(`SELECT
     u.Client_id,
     u.User_names,
     u.User_email,
@@ -27,3 +27,4 @@ GROUP BY
     u.User_email,
     u.Role`)
 }
+
