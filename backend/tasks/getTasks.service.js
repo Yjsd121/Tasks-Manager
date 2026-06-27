@@ -73,3 +73,48 @@ exports.getnextautoincrement = async () => {
 
   return rows[0]?.AUTO_INCREMENT || 1
 }
+
+exports.TotalTask = async () => {
+  const [result] = await Query(`
+    SELECT
+      COUNT(t.id) AS total,
+      SUM(CASE WHEN t.status = 'pending' THEN 1 ELSE 0 END) AS T_pending,
+      SUM(CASE WHEN t.status = 'completed' THEN 1 ELSE 0 END) AS T_completed,
+      SUM(CASE WHEN t.status = 'in-progress' THEN 1 ELSE 0 END) AS T_inprogress
+    FROM tasks t
+    `)
+
+  return [
+    {
+      Category: 'Total Tasks',
+      Total: result.total
+    },
+    {
+      Category: 'Pending',
+      Total: result.T_pending
+    },
+    {
+      Category: 'In Process',
+      Total: result.T_inprogress
+    },
+    {
+      Category: 'Completed',
+      Total: result.T_completed
+    }
+  ]
+}
+
+exports.TasksUser = async () => {
+  const result = await Query(`
+    SELECT
+      COUNT(*) AS Total,
+      Assignedto
+    FROM Tasks
+    WHERE Status = 'Completed'
+    GROUP BY Assignedto
+  `)
+  return result.map(item => ({
+    name: item.Assignedto,
+    Total: item.Total
+  }))
+}

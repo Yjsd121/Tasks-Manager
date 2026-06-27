@@ -1,13 +1,57 @@
 import './Dashboard.css'
+import { useEffect, useState } from 'react'
 
 import { SideBar } from '../../components/SideBar/SideBar.jsx'
 import MyChart from '../../components/barchar.jsx'
 
-import { taskStatusData } from '@/mock/Taskschart.js'
-import { employeeCompletedTasks } from '@/mock/userscompleted.js'
 import { usersMiniCards } from '@/mock/userdata2.js'
 
 export function Dashboard() {
+  const [data, setdata] = useState()
+  const [usertask, setusertask] = useState()
+  const token = window.localStorage.getItem('token')
+  async function Getdatatasks() {
+    const response = await fetch('http://localhost:3000/Dashboard/Totaltask', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`
+      }
+    })
+    const data = await response.json()
+    console.log(data)
+    return data.data
+  }
+
+  async function Getdatauser() {
+    const response = await fetch('http://localhost:3000/Dashboard/Usertask', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`
+      }
+    })
+    const data2 = await response.json()
+    console.log(data2)
+    return data2.data
+  }
+
+  useEffect(() => {
+    async function load() {
+      const data = await Getdatatasks()
+      setdata(data || [])
+    }
+    load()
+  }, [])
+
+  useEffect(() => {
+    async function load() {
+      const data = await Getdatauser()
+      setusertask(data || [])
+    }
+    load()
+  }, [])
+
   return (
     <section className='Dashboard-layout'>
       <SideBar />
@@ -22,12 +66,12 @@ export function Dashboard() {
         <section className='charts-grid'>
           <div className='chart-card'>
             <h3>Total Tasks</h3>
-            <MyChart data={taskStatusData} />
+            <MyChart data={data} />
           </div>
 
           <div className='chart-card'>
             <h3>Tasks completed by user</h3>
-            <MyChart data={employeeCompletedTasks} />
+            <MyChart data={usertask} />
           </div>
         </section>
 
