@@ -63,11 +63,8 @@ export default function MyChart({ data }) {
         }}
       >
         <CartesianGrid stroke='#E5E7EB' strokeDasharray='4 4' />
-
         <XAxis dataKey={labelKey} />
-
         <YAxis allowDecimals={false} />
-
         <Tooltip />
 
         <Bar

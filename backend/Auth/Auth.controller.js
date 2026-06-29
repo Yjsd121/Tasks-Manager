@@ -13,7 +13,9 @@ exports.authlogin = async (req, res) => {
     }
 
     if (password != user[0].User_pass) {
-      res.send('err')
+      return res.status(401).json({
+        message: 'Unauthorized'
+      })
     } else {
       const token = jwt.sign({
         id: user[0].Client_id,
@@ -35,6 +37,41 @@ exports.authlogin = async (req, res) => {
         img: user[0].Img_rute
       })
     }
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+exports.verify = async (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization
+
+    if (!authHeader) {
+      return res.status(401).json({
+        message: 'required token'
+      })
+    }
+
+    const token = authHeader.split(' ')[1]
+
+    if (!token) {
+      return res.status(401).json({
+        ok: false,
+        message: 'required token'
+      })
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) {
+        return res.status(401).json({
+          message: 'unauthorized'
+        })
+      }
+
+      req.user = decoded;
+      next()
+    })
+
   } catch (err) {
     console.log(err)
   }

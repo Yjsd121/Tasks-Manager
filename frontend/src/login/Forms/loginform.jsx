@@ -8,6 +8,7 @@ import { UserDcontext } from '../../context/usercontext'
 export function Formlogin() {
   const navigate = useNavigate()
   const { UserData, setUserData } = UserDcontext()
+  const [WrongPass, setWrongPass] = useState(false)
   const [formData, setformData] = useState({
     email: '',
     password: ''
@@ -25,27 +26,32 @@ export function Formlogin() {
 
     const response = await Authlogin(formData.email, formData.password)
 
-    const token = await response.json()
+    const data = await response.json()
 
-    window.localStorage.setItem('token', token.token)
+    if (!response.ok && data.message === 'Unauthorized') {
+      setWrongPass(true)
+      return
+    }
+    window.localStorage.setItem('token', data.token)
     window.localStorage.setItem('user', JSON.stringify({
-      email: token.email,
-      id: token.id,
-      role: token.role,
-      name: token.name,
-      Img: token.img
+      email: data.email,
+      id: data.id,
+      role: data.role,
+      name: data.name,
+      Img: data.img
     }))
 
     setUserData({
       ...UserData,
-      email: token.email,
-      role: token.role,
-      name: token.name,
-      Img: token.img
+      email: data.email,
+      role: data.role,
+      name: data.name,
+      Img: data.img
     })
-    if (token.token && token.role === 'user') {
+
+    if (data.token && data.role === 'user') {
       navigate('/tasksview')
-    } else if (token.token && token.role === 'admin') {
+    } else if (data.token && data.role === 'admin') {
       navigate('/AdminView/Dashboard')
     }
   }
@@ -90,7 +96,11 @@ export function Formlogin() {
             placeholder='password'
           />
         </div>
+
       </div>
+      {
+        WrongPass && <p className='wrongpass'>Wrong Password</p>
+      }
       <div style={{
         width: '100%',
         display: 'flex',
@@ -101,6 +111,7 @@ export function Formlogin() {
         <input type='checkbox' id='pass' onChange={ShowPassword} />
         Show password
       </div>
+
       <button type='submit' className='primary-button'>Login</button>
     </form>
   )

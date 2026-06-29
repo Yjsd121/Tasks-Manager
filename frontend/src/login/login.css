@@ -65,3 +65,17 @@
 .btn-form {
   box-shadow: 0px 3px 3px 0 rgba(0, 0, 0, 0.2);
 }
+
+.wrongpass{
+  font-size: 1rem;
+  color: red;
+  animation: shake .3s;
+
+}
+
+@keyframes shake {
+  0% {transform: translateX(-1px);}
+  50%{transform: translateX(1px);}
+  75%{transform: translateX(-1px);}
+  100%{transform: translateX(1px);}
+}

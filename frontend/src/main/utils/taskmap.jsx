@@ -7,6 +7,7 @@ export function Tasksmap({ tasks, onDelete, onEdit, filter }) {
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString('es-ES')
   }
+
   return (
     <section className='Tasks-container'>
       {
