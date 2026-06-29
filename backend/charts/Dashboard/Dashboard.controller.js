@@ -30,7 +30,6 @@ exports.UsersTaks = async (req, res) => {
       })
 
     }
-    console.log(data)
     return res.status(200).json({
       ok: true,
       data: data

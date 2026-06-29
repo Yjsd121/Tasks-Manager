@@ -10,12 +10,12 @@ app.use(express.json())
 app.use('/uploads', express.static('uploads'));
 
 app.use('/Auth', require('./Auth/Auth.routes'))
-app.use('/Dashboard', require('./charts/Dashboard/Dashboard.routes'))
+
 app.use(authmiddleware)
 app.use('/tasksview', require('./tasks/tasks.routes'))
 app.use('/Adminview', require('./users/user.routes'))
 app.use('/Minichart', require('./charts/Minichart/minichart.routes'))
-
+app.use('/Dashboard', require('./charts/Dashboard/Dashboard.routes'))
 
 app.listen(port, () => {
   console.log(`Server listen in http://localhost:${port}`)

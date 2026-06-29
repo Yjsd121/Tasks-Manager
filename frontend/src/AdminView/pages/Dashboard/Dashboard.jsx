@@ -40,14 +40,8 @@ export function Dashboard() {
     async function load() {
       const data = await Getdatatasks()
       setdata(data || [])
-    }
-    load()
-  }, [])
-
-  useEffect(() => {
-    async function load() {
-      const data = await Getdatauser()
-      setusertask(data || [])
+      const data2 = await Getdatauser()
+      setusertask(data2 || [])
     }
     load()
   }, [])

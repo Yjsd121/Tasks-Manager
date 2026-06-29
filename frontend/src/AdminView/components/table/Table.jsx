@@ -39,7 +39,6 @@ export function UsersTable({ users }) {
                       style={{ width: `${progress}%` }}
                     />
                   </div>
-                  {progress} %
                 </td>
                 <td>
                   <button className='btn-table' onClick={() => { }}>edit</button>
