@@ -1,10 +1,17 @@
 .Tasks-container {
   margin-top: 20px;
   padding: 10px;
+}
+
+.Block {
+  padding: 25px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
   gap: 1.5rem;
   justify-content: center;
+  overflow-y: auto;
+  max-height: 65vh;
+  border-radius: 25px;
 }
 
 .task-card {

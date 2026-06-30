@@ -67,7 +67,7 @@ export function Formlogin() {
   }
   return (
     <form
-      className='login-container'
+      className='login-container CardStyle'
       onSubmit={handlesubmit}
     >
       <div className='login'>
@@ -95,12 +95,12 @@ export function Formlogin() {
             className='login-input'
             placeholder='password'
           />
-        </div>
 
+        </div>
+        {
+          WrongPass && <p className='wrongpass'>Wrong Password</p>
+        }
       </div>
-      {
-        WrongPass && <p className='wrongpass'>Wrong Password</p>
-      }
       <div style={{
         width: '100%',
         display: 'flex',

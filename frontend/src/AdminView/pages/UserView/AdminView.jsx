@@ -1,5 +1,5 @@
 import { SideBar } from '@/AdminView/components/SideBar/SideBar'
-import { UsersTable } from '@/AdminView/components/table/Table'
+import { UsersTable } from './table/Table'
 import './AdminView.css'
 import { useState, useEffect } from 'react'
 import { Modal } from '@/components/modal/modal'
@@ -50,7 +50,7 @@ export function AdminView() {
     <section className='AdminView-container'>
       <SideBar />
       <main className='admin-content'>
-        <section className='header-card'>
+        <section className='header-card CardStyle'>
           <div className='title'>
             <h2>Gestión de Usuarios</h2>
             <p>{totalusers} usuarios registrados</p>

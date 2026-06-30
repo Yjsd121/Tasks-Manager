@@ -1,7 +1,7 @@
 export function UsersTable({ users }) {
   return (
-    <section className='table-container'>
-      <table className='users-table'>
+    <section className='table-container '>
+      <table className='users-table CardStyle'>
         <thead>
           <tr>
             <th>User</th>
