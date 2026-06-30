@@ -13,11 +13,9 @@
 }
 
 .dashboard-header {
-  background: white;
   border-radius: 16px;
   padding: 20px 24px;
   margin-top: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
 }
 
 .dashboard-title h2 {
@@ -42,10 +40,8 @@
 }
 
 .chart-card {
-  background: white;
   border-radius: 15px;
   padding: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
   overflow: hidden;
 }
 
@@ -57,13 +53,14 @@
 }
 
 .minicard {
-  background-color: white;
+  
   padding: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 1rem;
   border-radius: 16px;
+  
 }
 
 .tiitle-tasks {

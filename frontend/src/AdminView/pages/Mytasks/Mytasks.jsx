@@ -7,7 +7,7 @@ export function Mytasks() {
     <section className='AdminView-container'>
       <SideBar />
       <main className='admin-content'>
-        <section className='dashboard-header'>
+        <section className='dashboard-header CardStyle'>
           <div className='dashboard-title'>
             <h2>My Tasks</h2>
             <p>Show your tasks and create tasks for everyone</p>
