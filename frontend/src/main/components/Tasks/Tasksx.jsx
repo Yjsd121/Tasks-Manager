@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
-import { Searchfilters } from '@/components/search-filters/filtersBar'
+import { Searchfilters } from './search-filters/filtersBar'
 import { Modal } from '@/components/modal/modal'
 
 import { AddTask } from '@/main/forms/AddTaskform'
@@ -20,11 +20,9 @@ export function Tasksx() {
   const token = window.localStorage.getItem('token')
 
   const navigate = useNavigate()
-  // I need separe this in another folder
   async function gettasks() {
     try {
-      const user = JSON.parse(window.localStorage.getItem('user'))
-      const response = await fetch(`http://localhost:3000/tasksview/${user.name}`, {
+      const response = await fetch('http://localhost:3000/tasksview', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

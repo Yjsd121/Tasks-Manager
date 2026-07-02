@@ -18,9 +18,7 @@ export function UsersTable({ users }) {
             const progress =
               user.assigned_tasks === 0
                 ? 0
-                : Math.round(
-                  (user.completed_tasks / user.assigned_tasks) * 100
-                )
+                : Math.round((user.completed_tasks / user.assigned_tasks) * 100)
 
             return (
               <tr key={user.Client_id}>
@@ -33,11 +31,22 @@ export function UsersTable({ users }) {
                 <td>{user.assigned_tasks}</td>
                 <td>{user.completed_tasks}</td>
                 <td>
-                  <div className='progress-container'>
-                    <div
-                      className='progress-bar'
-                      style={{ width: `${progress}%` }}
-                    />
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '1rem'
+                  }}
+                  >
+                    <div className='progress-container'>
+                      <div
+                        className='progress-bar'
+                        style={{
+                          width: `${progress}%`,
+                          backgroundColor: progress < 30 ? 'red' : progress > 30 && progress < 60 ? 'orange' : 'green'
+                        }}
+                      />
+                    </div>
+                    {progress}%
                   </div>
                 </td>
                 <td>

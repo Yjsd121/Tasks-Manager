@@ -1,7 +1,7 @@
 import './Viewtask.css'
 import { Barnav } from '@/main/components/barnav/barnav'
 import { Minichart } from './components/minichart/minichart'
-import { Tasksx } from '@/components/Tasks/Tasksx'
+import { Tasksx } from './components/Tasks/Tasksx'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 

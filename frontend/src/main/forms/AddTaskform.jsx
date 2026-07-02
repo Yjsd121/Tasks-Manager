@@ -4,6 +4,7 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
+
 import './AddTaskform.css'
 
 const initialTask = {
@@ -46,15 +47,18 @@ export function AddTask({ task, onCancel, onSave }) {
 
   const handleChange = (event) => {
     const { name, value } = event.target
+
     setError('')
-    setFormData(prevTask => ({
-      ...prevTask,
+
+    setFormData(prev => ({
+      ...prev,
       [name]: value
     }))
   }
 
   const handleSubmit = async(event) => {
     event.preventDefault()
+
     try {
       await onSave(formData)
     } catch (error) {
@@ -63,75 +67,107 @@ export function AddTask({ task, onCancel, onSave }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <p>Title</p>
-      <input
-        name='title'
-        placeholder='Title'
-        style={{ width: '100%' }}
-        value={formData.title}
-        onChange={handleChange}
-        required
-      />
-      <p>Description</p>
-      <textarea
-        name='description'
-        placeholder='Desciption'
-        value={formData.description}
-        onChange={handleChange}
-        required
-      />
-      <div className='filters-container'>
+    <form className='custom-form' onSubmit={handleSubmit}>
+      <div className='form-group'>
+        <label className='form-label'>
+          Title
+        </label>
+        <input
+          className='form-input'
+          name='title'
+          placeholder='Title'
+          value={formData.title}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div className='form-group'>
+        <label className='form-label'>
+          Description
+        </label>
+
+        <textarea
+          className='form-textarea'
+          name='description'
+          placeholder='Description'
+          value={formData.description}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div className='select-container'>
         <Box sx={{ minWidth: 120 }}>
           <FormControl fullWidth required>
-            <InputLabel id='demo-simple-select-label'>Priority</InputLabel>
+            <InputLabel>Priority</InputLabel>
             <Select
-              labelId='demo-simple-select-label'
-              id='demo-simple-select'
               name='priority'
               value={formData.priority}
               label='Priority'
               onChange={handleChange}
-              required
             >
-              <MenuItem value='high'>high</MenuItem>
-              <MenuItem value='medium'>medium</MenuItem>
-              <MenuItem value='low'>low</MenuItem>
+              <MenuItem value='high'>High</MenuItem>
+              <MenuItem value='medium'>Medium</MenuItem>
+              <MenuItem value='low'>Low</MenuItem>
             </Select>
           </FormControl>
         </Box>
 
         <Box sx={{ minWidth: 120 }}>
           <FormControl fullWidth required>
-            <InputLabel id='demo-simple-select-label'>Asigned to</InputLabel>
+
+            <InputLabel>Assigned to</InputLabel>
+
             <Select
-              labelId='demo-simple-select-label'
-              id='demo-simple-select'
               name='assignedTo'
               value={formData.assignedTo}
-              label='Asigned to'
+              label='Assigned to'
               onChange={handleChange}
-              required
             >
               {assignedUsers.map(user => (
-                <MenuItem key={user} value={user}>{user}</MenuItem>
+                <MenuItem
+                  key={user}
+                  value={user}
+                >
+                  {user}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
         </Box>
+
         <input
-          className='inputTime'
-          name='dueDate'
+          className='form-input input-date'
           type='date'
+          name='dueDate'
           value={formData.dueDate}
           onChange={handleChange}
           required
         />
+
       </div>
-      {error && <p className='form-error'>{error}</p>}
-      <div className='btn-conntainer'>
-        <button type='button' onClick={onCancel}>cancel</button>
-        <button type='submit'>{isEditing ? 'update' : 'send'}</button>
+
+      {error &&
+        <p className='form-error'>
+          {error}
+        </p>}
+
+      <div className='form-actions'>
+
+        <button
+          type='button'
+          className='secondary-btn'
+          onClick={onCancel}
+        >
+          Cancel
+        </button>
+        <button
+          type='submit'
+          className='primary-btn'
+        >
+          {isEditing ? 'Update' : 'Create Task'}
+        </button>
       </div>
     </form>
   )

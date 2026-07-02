@@ -16,7 +16,13 @@ export function MinicardMpa({ data }) {
               {progress}%
             </div>
             <div className='progress-container'>
-              <div className='progress-bar' style={{ width: `${progress}%` }} />
+              <div
+                className='progress-bar'
+                style={{
+                  width: `${progress}%`,
+                  backgroundColor: progress < 30 ? 'red' : progress > 30 && progress < 60 ? 'orange' : 'green'
+                }}
+              />
             </div>
             <div className='tasks-cont'>
               <p>{user.asignadas} asignadas </p>

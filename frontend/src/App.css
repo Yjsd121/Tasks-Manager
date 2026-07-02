@@ -13,6 +13,7 @@ body {
 main {
   background: #EEF5FF;
   min-height: 100vh;
+  max-height: 100vh;
 }
 
 button {

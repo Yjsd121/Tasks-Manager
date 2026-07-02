@@ -14,13 +14,14 @@
   border-radius: 12px;
   width: fit-content;
   align-items: center;
+  
 }
 
 .filter {
   border: none;
   background: transparent;
   color: #1f2937;
-  padding: .6rem 1rem;
+  padding: .1rem 1rem;
   border-radius: 8px;
   cursor: pointer;
   transition: .2s;

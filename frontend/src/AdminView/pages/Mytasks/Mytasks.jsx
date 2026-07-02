@@ -1,4 +1,4 @@
-import { Tasksx } from '../../../components/Tasks/Tasksx'
+import { Tasksx } from '@/main/components/Tasks/Tasksx'
 import { SideBar } from '../../components/SideBar/SideBar'
 import '../UserView/AdminView.css'
 

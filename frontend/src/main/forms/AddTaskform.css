@@ -1,56 +1,196 @@
-form {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  gap: 0.5rem;
+.custom-form{
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+    width:100%;
+    padding:1.5rem;
 }
 
-form p {
-  font-size: 20px;
+/* ---------- grupos ---------- */
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:.45rem;
 }
 
-form input {
-  border-radius: 5px;
-  padding-left: 5px;
-  outline: none;
+.form-label{
+    font-size:.95rem;
+    font-weight:600;
+    color:#2F3542;
 }
 
-form textarea {
-  width: 100%;
-  min-height: 100px;
-  resize: vertical;
-  border-radius: 10px;
-  padding-left: 5px;
-  outline: none;
+/* ---------- inputs ---------- */
+
+.form-input,
+.form-textarea{
+
+    width:100%;
+    box-sizing:border-box;
+
+    border:1px solid #D8DCE4;
+    border-radius:10px;
+
+    background:#FAFAFA;
+
+    padding:12px 14px;
+
+    font-size:.95rem;
+
+    transition:.25s;
+    outline:none;
 }
 
-.inputTime {
-  height: 53px;
-  border-radius: 5px;
-  border: solid 1px rgb(184, 181, 181);
+.form-input{
+
+    height:48px;
 }
 
-.btn-conntainer {
-  display: flex;
-  justify-content: space-around;
+.form-textarea{
+
+    min-height:120px;
+    resize:vertical;
 }
 
-.btn-conntainer button {
-  width: 150px;
-  height: 40px;
-  background-color: transparent;
-  border: solid 2px rgb(212, 210, 210);
-  box-shadow: 0px 3px 3px 0px rgba(212, 210, 210, 1);
-  transition: all .2s ease;
+.form-input::placeholder,
+.form-textarea::placeholder{
+
+    color:#9AA0AC;
 }
 
-.btn-conntainer button:active {
-  transform: translateY(3px);
-  box-shadow: 0px 0px 0px 0px rgba(212, 210, 210, 1);
+.form-input:hover,
+.form-textarea:hover{
+
+    border-color:#BFC6D4;
 }
 
-.form-error {
-  color: rgb(185, 28, 28);
-  font-size: 14px;
-  font-weight: 600;
+.form-input:focus,
+.form-textarea:focus{
+
+    border-color:#6C63FF;
+    background:white;
+
+    box-shadow:0 0 0 4px rgba(108,99,255,.15);
+}
+
+/* ---------- grid ---------- */
+
+.select-container{
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:.8rem;
+}
+
+/* ---------- date ---------- */
+
+.input-date{
+
+    padding-inline:12px;
+}
+
+/* ---------- Material UI ---------- */
+
+.MuiOutlinedInput-root{
+
+    border-radius:10px !important;
+    background:#FAFAFA;
+}
+
+.MuiOutlinedInput-root:hover
+.MuiOutlinedInput-notchedOutline{
+
+    border-color:#BFC6D4 !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused
+.MuiOutlinedInput-notchedOutline{
+
+    border-color:#6C63FF !important;
+    border-width:2px !important;
+}
+
+.MuiInputLabel-root.Mui-focused{
+
+    color:#6C63FF !important;
+}
+
+/* ---------- botones ---------- */
+
+.form-actions{
+
+    display:flex;
+    justify-content:flex-end;
+    gap:1rem;
+
+    margin-top:.5rem;
+}
+
+.primary-btn,
+.secondary-btn{
+
+    width:145px;
+    height:44px;
+
+    border:none;
+    border-radius:10px;
+
+    font-size:.95rem;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+/* secundario */
+
+.secondary-btn{
+
+    background:#F3F4F6;
+    color:#4B5563;
+}
+
+.secondary-btn:hover{
+
+    background:#E5E7EB;
+}
+
+/* principal */
+
+.primary-btn{
+
+    background:#6C63FF;
+    color:white;
+
+    box-shadow:0 10px 18px rgba(108,99,255,.25);
+}
+
+.primary-btn:hover{
+
+    background:#5C52F5;
+    transform:translateY(-2px);
+}
+
+.primary-btn:active,
+.secondary-btn:active{
+
+    transform:scale(.97);
+}
+
+/* ---------- errores ---------- */
+
+.form-error{
+
+    background:#FEE2E2;
+    color:#B91C1C;
+
+    border:1px solid #FECACA;
+
+    border-radius:10px;
+
+    padding:.8rem;
+
+    font-size:.9rem;
+    font-weight:600;
 }

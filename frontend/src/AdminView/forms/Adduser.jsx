@@ -1,4 +1,4 @@
-import './adduser.css'
+import './Adduser.css'
 import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
@@ -18,6 +18,7 @@ export function AddUserForm({ user, onCancel }) {
     ...InitialUser,
     ...user
   })
+
   const handleChange = (event) => {
     const { name, value } = event.target
     setFormData(prevTask => ({
@@ -29,26 +30,29 @@ export function AddUserForm({ user, onCancel }) {
     console.log(formData)
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <div className='InfoData-container'>
-        <p>Name</p>
+    <form className='custom-form' onSubmit={handleSubmit}>
+      <div className='form-group'>
+        <p className='form-label'>Name</p>
         <input
+          className='form-input'
           name='Name'
           placeholder='Name'
           value={formData.Name}
           onChange={handleChange}
           required
         />
-        <p>Emaiil</p>
+        <p className='form-label'>Emaiil</p>
         <input
+          className='form-input'
           name='Email'
           placeholder='Email'
           value={formData.Email}
           onChange={handleChange}
           required
         />
-        <p>Password</p>
+        <p className='form-label'>Password</p>
         <input
+          className='form-input'
           name='Password'
           placeholder='Password'
           value={formData.Password}
@@ -56,26 +60,30 @@ export function AddUserForm({ user, onCancel }) {
           required
         />
       </div>
-      <Box sx={{ minWidth: 120 }}>
-        <FormControl fullWidth required>
-          <InputLabel id='demo-simple-select-label'>Role</InputLabel>
-          <Select
-            labelId='demo-simple-select-label'
-            id='demo-simple-select'
-            name='Role'
-            value={formData.Role}
-            label='Role'
-            onChange={handleChange}
-            required
-          >
-            <MenuItem value='admin'>admin</MenuItem>
-            <MenuItem value='supervisor'>supervisor</MenuItem>
-            <MenuItem value='Employee'>Employee</MenuItem>
-          </Select>
-        </FormControl>
-      </Box>
-      <button type='button' onClick={onCancel}>Close</button>
-      <button type='submit'>add</button>
+      <div className='select-container'>
+        <Box sx={{ minWidth: 120 }}>
+          <FormControl fullWidth required>
+            <InputLabel id='demo-simple-select-label'>Role</InputLabel>
+            <Select
+              labelId='demo-simple-select-label'
+              id='demo-simple-select'
+              name='Role'
+              value={formData.Role}
+              label='Role'
+              onChange={handleChange}
+              required
+            >
+              <MenuItem value='admin'>admin</MenuItem>
+              <MenuItem value='supervisor'>supervisor</MenuItem>
+              <MenuItem value='Employee'>Employee</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+      </div>
+      <div className='form-actions'>
+        <button className='secondary-btn' type='button' onClick={onCancel}>Close</button>
+        <button className='primary-btn' type='submit'>add</button>
+      </div>
     </form>
   )
 }

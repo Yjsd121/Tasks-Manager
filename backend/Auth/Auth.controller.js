@@ -19,6 +19,7 @@ exports.authlogin = async (req, res) => {
     } else {
       const token = jwt.sign({
         id: user[0].Client_id,
+        name: user[0].User_names,
         email: user[0].User_email,
         role: user[0].Role
       },
