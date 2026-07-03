@@ -1,9 +1,11 @@
 const Query = require('../utils/Query')
 const Task = require('../models/Task')
 
+const taskSelect = '`id`, `Task_id` AS taskId, `title`, `priority`, `Status` AS status, `Description` AS description, `Createdby` AS createdBy, `Assignedto` AS assignedTo, `Createat` AS createdAt, `dueDate`'
+
 exports.gettasks = async (name) => {
   return await Query(
-    'SELECT `id`, `Task_id`, `title`, `priority`, `Status` AS status, `Description` AS description, `Createdby` AS createdBy, `Assignedto` AS assignedTo, `Createat` AS createdAt, `dueDate` FROM tasks WHERE AssignedTo = ?',
+    `SELECT ${taskSelect} FROM tasks WHERE Assignedto = ?`,
     [name]
   )
 }
@@ -14,7 +16,7 @@ exports.createtask = async (taskData, user) => {
     ...taskData,
     taskId: Task.buildTaskId(nextId),
     createdBy: user?.email || user?.id || null,
-    createat: new Date()
+    createAt: new Date()
   })
   const errors = task.validate()
 
@@ -59,10 +61,12 @@ exports.deletetask = async (id) => {
 }
 
 exports.gettaskbyid = async (id) => {
-  return await Query(
-    'SELECT `id`, `Task_id`, `title`, `priority`, `Status` AS status, `Description` AS description, `Createdby` AS createdBy, `Assignedto` AS assignedTo, `Createat` AS createdAt, `dueDate` FROM tasks WHERE AssignedTo = ?',
+  const rows = await Query(
+    `SELECT ${taskSelect} FROM tasks WHERE id = ?`,
     [id]
   )
+
+  return rows[0] || null
 }
 
 exports.getnextautoincrement = async () => {
@@ -73,14 +77,14 @@ exports.getnextautoincrement = async () => {
 
   return rows[0]?.AUTO_INCREMENT || 1
 }
-
+//These Querys are for Dashboard 
 exports.TotalTask = async () => {
   const [result] = await Query(`
     SELECT
       COUNT(t.id) AS total,
-      SUM(CASE WHEN t.status = 'pending' THEN 1 ELSE 0 END) AS T_pending,
-      SUM(CASE WHEN t.status = 'completed' THEN 1 ELSE 0 END) AS T_completed,
-      SUM(CASE WHEN t.status = 'in-progress' THEN 1 ELSE 0 END) AS T_inprogress
+      SUM(CASE WHEN t.Status = 'pending' THEN 1 ELSE 0 END) AS T_pending,
+      SUM(CASE WHEN t.Status = 'completed' THEN 1 ELSE 0 END) AS T_completed,
+      SUM(CASE WHEN t.Status = 'in-progress' THEN 1 ELSE 0 END) AS T_inprogress
     FROM tasks t
     `)
 
@@ -109,8 +113,8 @@ exports.TasksUser = async () => {
     SELECT
       COUNT(*) AS Total,
       Assignedto
-    FROM Tasks
-    WHERE Status = 'Completed'
+    FROM tasks
+    WHERE Status = 'completed'
     GROUP BY Assignedto
   `)
   return result.map(item => ({

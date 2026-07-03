@@ -27,7 +27,6 @@ export function Formlogin() {
     const response = await Authlogin(formData.email, formData.password)
 
     const data = await response.json()
-
     if (!response.ok && data.message === 'Unauthorized') {
       setWrongPass(true)
       return
@@ -38,6 +37,7 @@ export function Formlogin() {
       id: data.id,
       role: data.role,
       name: data.name,
+      LastName: data.LastName,
       Img: data.img
     }))
 

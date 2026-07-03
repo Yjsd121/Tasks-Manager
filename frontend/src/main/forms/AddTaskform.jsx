@@ -47,9 +47,7 @@ export function AddTask({ task, onCancel, onSave }) {
 
   const handleChange = (event) => {
     const { name, value } = event.target
-
     setError('')
-
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -58,7 +56,6 @@ export function AddTask({ task, onCancel, onSave }) {
 
   const handleSubmit = async(event) => {
     event.preventDefault()
-
     try {
       await onSave(formData)
     } catch (error) {

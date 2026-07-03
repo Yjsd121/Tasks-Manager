@@ -1,4 +1,3 @@
-import './Adduser.css'
 import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
@@ -8,12 +7,13 @@ import { useState } from 'react'
 
 const InitialUser = {
   Name: '',
+  LastName: '',
   Email: '',
   Password: '',
   Role: ''
 }
 
-export function AddUserForm({ user, onCancel }) {
+export function AddUserForm({ user, onCancel, onSave }) {
   const [formData, setFormData] = useState({
     ...InitialUser,
     ...user
@@ -26,9 +26,13 @@ export function AddUserForm({ user, onCancel }) {
       [name]: value
     }))
   }
-  const handleSubmit = () => {
+  const isEditinng = Boolean(user?.Client_id)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
     console.log(formData)
   }
+
   return (
     <form className='custom-form' onSubmit={handleSubmit}>
       <div className='form-group'>
@@ -37,16 +41,25 @@ export function AddUserForm({ user, onCancel }) {
           className='form-input'
           name='Name'
           placeholder='Name'
-          value={formData.Name}
+          value={formData.User_names}
           onChange={handleChange}
           required
         />
-        <p className='form-label'>Emaiil</p>
+        <p className='form-label'>LastName</p>
+        <input
+          className='form-input'
+          name='LastName'
+          placeholder='LastName'
+          value={formData.LastName}
+          onChange={handleChange}
+          required
+        />
+        <p className='form-label'>Email</p>
         <input
           className='form-input'
           name='Email'
           placeholder='Email'
-          value={formData.Email}
+          value={formData.User_email}
           onChange={handleChange}
           required
         />
@@ -82,7 +95,7 @@ export function AddUserForm({ user, onCancel }) {
       </div>
       <div className='form-actions'>
         <button className='secondary-btn' type='button' onClick={onCancel}>Close</button>
-        <button className='primary-btn' type='submit'>add</button>
+        <button className='primary-btn' type='submit'>{isEditinng ? 'Update' : 'Add'}</button>
       </div>
     </form>
   )

@@ -20,6 +20,7 @@ exports.authlogin = async (req, res) => {
       const token = jwt.sign({
         id: user[0].Client_id,
         name: user[0].User_names,
+        LastName: user[0].User_lastnames,
         email: user[0].User_email,
         role: user[0].Role
       },
@@ -33,6 +34,7 @@ exports.authlogin = async (req, res) => {
         token,
         id: user[0].Client_id,
         email: user[0].User_email,
+        LastName: user[0].User_lastnames,
         role: user[0].Role,
         name: user[0].User_names,
         img: user[0].Img_rute

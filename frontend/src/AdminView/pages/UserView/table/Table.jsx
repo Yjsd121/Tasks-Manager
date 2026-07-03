@@ -1,4 +1,6 @@
-export function UsersTable({ users }) {
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
+export function UsersTable({ users, onEdit }) {
   return (
     <section className='table-container '>
       <table className='users-table CardStyle'>
@@ -49,8 +51,17 @@ export function UsersTable({ users }) {
                     {progress}%
                   </div>
                 </td>
-                <td>
-                  <button className='btn-table' onClick={() => { }}>edit</button>
+                <td style={{
+                  display: 'flex',
+                  gap: '.5rem'
+                }}
+                >
+                  <button className='btn-card' onClick={() => { onEdit(user) }}>
+                    <EditOutlinedIcon />
+                  </button>
+                  <button className='btn-card' onClick={() => { }}>
+                    <DeleteForeverOutlinedIcon />
+                  </button>
                 </td>
               </tr>
             )

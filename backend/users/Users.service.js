@@ -28,6 +28,20 @@ GROUP BY
     u.Role`)
 }
 
+exports.createUser = async (UserData, user) => {
+  const nextId = await exports.getnextautoincrement()
+}
+
+
+exports.getnextautoincrement = async () => {
+  const rows = await Query(
+    'SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ?',
+    ['tasks']
+  )
+
+  return rows[0]?.AUTO_INCREMENT || 1
+}
+// This query is for Dashboard
 exports.MinicardsUsers = async () => {
   return await Query(`
     SELECT

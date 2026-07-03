@@ -73,8 +73,6 @@
     box-shadow:0 0 0 4px rgba(108,99,255,.15);
 }
 
-/* ---------- grid ---------- */
-
 .select-container{
 
     display:grid;
@@ -82,14 +80,10 @@
     gap:.8rem;
 }
 
-/* ---------- date ---------- */
-
 .input-date{
 
     padding-inline:12px;
 }
-
-/* ---------- Material UI ---------- */
 
 .MuiOutlinedInput-root{
 

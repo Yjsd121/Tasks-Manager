@@ -1,6 +1,7 @@
 .Tasks-container {
   margin-top: 20px;
   padding: 10px;
+  max-height: 900px;
 }
 
 .Block {
@@ -10,8 +11,8 @@
   gap: 1.5rem;
   justify-content: center;
   overflow-y: auto;
-  min-height: 65vh;
-  max-height: 65vh;
+  min-height: 50vh;
+  max-height: 60vh;
   border-radius: 25px;
 }
 

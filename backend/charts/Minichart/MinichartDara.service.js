@@ -5,9 +5,9 @@ exports.TasksInfo = async (name) => {
   const [result] = await Query(`
     SELECT
       COUNT(t.id) AS total,
-      SUM(CASE WHEN t.status = 'pending' THEN 1 ELSE 0 END) AS T_pending,
-      SUM(CASE WHEN t.status = 'completed' THEN 1 ELSE 0 END) AS T_completed,
-      SUM(CASE WHEN t.status = 'in-progress' THEN 1 ELSE 0 END) AS T_inprogress
+      SUM(CASE WHEN t.Status = 'pending' THEN 1 ELSE 0 END) AS T_pending,
+      SUM(CASE WHEN t.Status = 'completed' THEN 1 ELSE 0 END) AS T_completed,
+      SUM(CASE WHEN t.Status = 'in-progress' THEN 1 ELSE 0 END) AS T_inprogress
     FROM tasks t
     WHERE Assignedto = ?
   `, [name])

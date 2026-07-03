@@ -3,27 +3,22 @@ class Task {
     taskId = null,
     title,
     description,
-    Description,
     priority,
     assignedTo,
-    Assignedto,
     dueDate,
     createAt = new Date(),
-    createat,
     status = 'pending',
-    Status,
-    createdBy = null,
-    Createdby = null
+    createdBy = null
   }) {
     this.taskId = taskId
     this.title = title?.trim()
-    this.description = (description || Description)?.trim()
+    this.description = description?.trim()
     this.priority = priority
-    this.assignedTo = assignedTo || Assignedto
+    this.assignedTo = assignedTo
     this.dueDate = dueDate
-    this.createAt = createat || createAt
-    this.status = Status || status || 'pending'
-    this.createdBy = createdBy || Createdby
+    this.createAt = createAt
+    this.status = status || 'pending'
+    this.createdBy = createdBy
   }
 
   validate() {
@@ -60,12 +55,9 @@ class Task {
     return {
       title: 'title',
       description: 'Description',
-      Description: 'Description',
       status: 'Status',
-      Status: 'Status',
       priority: 'priority',
       assignedTo: 'Assignedto',
-      Assignedto: 'Assignedto',
       dueDate: 'dueDate'
     }
   }
