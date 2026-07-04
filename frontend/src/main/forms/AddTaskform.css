@@ -74,10 +74,10 @@
 }
 
 .select-container{
-
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:.8rem;
+    align-items: center;
 }
 
 .input-date{

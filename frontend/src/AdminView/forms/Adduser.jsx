@@ -10,7 +10,8 @@ const InitialUser = {
   LastName: '',
   Email: '',
   Password: '',
-  Role: ''
+  Role: '',
+  Img: ''
 }
 
 export function AddUserForm({ user, onCancel, onSave }) {
@@ -18,7 +19,6 @@ export function AddUserForm({ user, onCancel, onSave }) {
     ...InitialUser,
     ...user
   })
-
   const handleChange = (event) => {
     const { name, value } = event.target
     setFormData(prevTask => ({
@@ -33,6 +33,17 @@ export function AddUserForm({ user, onCancel, onSave }) {
     console.log(formData)
   }
 
+  const [preview, setPreview] = useState(null)
+  const [image, setImage] = useState(null)
+
+  function handleImage(e) {
+    const file = e.target.files[0]
+
+    if (!file) return
+
+    setImage(file)
+    setPreview(URL.createObjectURL(file))
+  }
   return (
     <form className='custom-form' onSubmit={handleSubmit}>
       <div className='form-group'>
@@ -50,7 +61,7 @@ export function AddUserForm({ user, onCancel, onSave }) {
           className='form-input'
           name='LastName'
           placeholder='LastName'
-          value={formData.LastName}
+          value={formData.User_lastnames}
           onChange={handleChange}
           required
         />
@@ -92,6 +103,21 @@ export function AddUserForm({ user, onCancel, onSave }) {
             </Select>
           </FormControl>
         </Box>
+        <label className='upload-image'>
+          <input
+            type='file'
+            accept='image/*'
+            onChange={handleImage}
+            name='Img'
+            value={formData.Img}
+          />
+          <span>Seleccionar imagen</span>
+        </label>
+        <img
+          className='profile-preview'
+          src={preview || (isEditinng ? `http://localhost:3000/uploads/${formData.Img_rute}` : '/UserDefault.png')}
+          alt='img profile'
+        />
       </div>
       <div className='form-actions'>
         <button className='secondary-btn' type='button' onClick={onCancel}>Close</button>

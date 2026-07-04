@@ -75,6 +75,7 @@ export function AdminView() {
 
     setdata(prevUser => prevUser.filter(User => User.id !== id))
   }
+
   useEffect(() => {
     async function loaddata() {
       const data = await getusers()
