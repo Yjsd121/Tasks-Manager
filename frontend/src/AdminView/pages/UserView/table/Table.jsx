@@ -1,6 +1,6 @@
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-export function UsersTable({ users, onEdit }) {
+export function UsersTable({ users, onEdit, onDelete }) {
   return (
     <section className='table-container '>
       <table className='users-table CardStyle'>
@@ -59,7 +59,7 @@ export function UsersTable({ users, onEdit }) {
                   <button className='btn-card' onClick={() => { onEdit(user) }}>
                     <EditOutlinedIcon />
                   </button>
-                  <button className='btn-card' onClick={() => { }}>
+                  <button className='btn-card' onClick={() => { onDelete(user.Client_id) }}>
                     <DeleteForeverOutlinedIcon />
                   </button>
                 </td>

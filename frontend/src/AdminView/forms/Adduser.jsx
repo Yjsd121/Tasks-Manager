@@ -6,12 +6,12 @@ import Select from '@mui/material/Select'
 import { useState } from 'react'
 
 const InitialUser = {
-  Name: '',
-  LastName: '',
-  Email: '',
+  User_names: '',
+  User_lastnames: '',
+  User_email: '',
   Password: '',
   Role: '',
-  Img: ''
+  Img_rute: ''
 }
 
 export function AddUserForm({ user, onCancel, onSave }) {
@@ -28,9 +28,26 @@ export function AddUserForm({ user, onCancel, onSave }) {
   }
   const isEditinng = Boolean(user?.Client_id)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
-    console.log(formData)
+    const formdata = new FormData()
+
+    if (isEditinng) {
+      formdata.append('Client_id', formData.Client_id)
+    }
+
+    formdata.append('User_names', formData.User_names)
+    formdata.append('User_lastnames', formData.User_lastnames)
+    formdata.append('User_email', formData.User_email)
+    formdata.append('Role', formData.Role)
+    if (formData.Password) {
+      formdata.append('Password', formData.Password)
+    }
+    if (image) {
+      formdata.append('Img_rute', image)
+    }
+
+    await onSave(formdata)
   }
 
   const [preview, setPreview] = useState(null)
@@ -50,7 +67,7 @@ export function AddUserForm({ user, onCancel, onSave }) {
         <p className='form-label'>Name</p>
         <input
           className='form-input'
-          name='Name'
+          name='User_names'
           placeholder='Name'
           value={formData.User_names}
           onChange={handleChange}
@@ -59,7 +76,7 @@ export function AddUserForm({ user, onCancel, onSave }) {
         <p className='form-label'>LastName</p>
         <input
           className='form-input'
-          name='LastName'
+          name='User_lastnames'
           placeholder='LastName'
           value={formData.User_lastnames}
           onChange={handleChange}
@@ -68,7 +85,7 @@ export function AddUserForm({ user, onCancel, onSave }) {
         <p className='form-label'>Email</p>
         <input
           className='form-input'
-          name='Email'
+          name='User_email'
           placeholder='Email'
           value={formData.User_email}
           onChange={handleChange}
@@ -78,10 +95,10 @@ export function AddUserForm({ user, onCancel, onSave }) {
         <input
           className='form-input'
           name='Password'
-          placeholder='Password'
+          placeholder={isEditinng ? 'New password (optional)' : 'Password'}
           value={formData.Password}
           onChange={handleChange}
-          required
+          required={!isEditinng}
         />
       </div>
       <div className='select-container'>
@@ -109,7 +126,6 @@ export function AddUserForm({ user, onCancel, onSave }) {
             accept='image/*'
             onChange={handleImage}
             name='Img'
-            value={formData.Img}
           />
           <span>Seleccionar imagen</span>
         </label>

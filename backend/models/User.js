@@ -5,14 +5,22 @@ class User {
     lastname,
     email,
     password,
-    role
+    role,
+    img = null,
+    User_names,
+    User_lastnames,
+    User_email,
+    Password,
+    Role,
+    Img_rute
   }) {
     this.userid = userid
-    this.name = name
-    this.lastname = lastname
-    this.email = email
-    this.password = password
-    this.role = role
+    this.name = (name || User_names)?.trim()
+    this.lastname = (lastname || User_lastnames)?.trim()
+    this.email = (email || User_email)?.trim()
+    this.password = password || Password
+    this.role = role || Role
+    this.img = img || Img_rute
   }
 
   validate() {
@@ -24,6 +32,8 @@ class User {
     if (!this.email) err.push('email field empty')
     if (!this.password) err.push('password field empty')
     if (!this.role) err.push('role field empty')
+
+    return err
   }
 
   toCreateParams() {
@@ -33,11 +43,12 @@ class User {
       this.lastname,
       this.email,
       this.password,
-      this.role
+      this.role,
+      this.img
     ]
   }
 
-  static bluidUserId(name, lastname, number) {
+  static buildUserId(name, lastname, number) {
     const today = new Date()
     const year = today.getFullYear()
     const initials =
@@ -52,7 +63,14 @@ class User {
       lastname: 'User_lastnames',
       email: 'User_email',
       password: 'User_pass',
-      role: 'Role'
+      role: 'Role',
+      img: 'Img_rute',
+      User_names: 'User_names',
+      User_lastnames: 'User_lastnames',
+      User_email: 'User_email',
+      Password: 'User_pass',
+      Role: 'Role',
+      Img_rute: 'Img_rute'
     }
   }
 

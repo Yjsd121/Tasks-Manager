@@ -20,6 +20,7 @@ export function Tasksx() {
   const token = window.localStorage.getItem('token')
 
   const navigate = useNavigate()
+
   async function gettasks() {
     try {
       const response = await fetch('http://localhost:3000/tasksview', {

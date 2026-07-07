@@ -33,14 +33,14 @@ export function AdminView() {
   }
 
   async function saveuser(user) {
-    const isEditng = Boolean(user.id)
-    const response = await fetch(`http://localhost:3000/Adminview${isEditng ? `/${user.id}` : ''}`, {
+    const id = user.get('Client_id')
+    const isEditng = Boolean(id)
+    const response = await fetch(`http://localhost:3000/Adminview${isEditng ? `/${id}` : '/create'}`, {
       method: isEditng ? 'PUT' : 'POST',
       headers: {
-        'Content-Type': 'application/json',
         authorization: `Bearer ${token}`
       },
-      body: JSON.stringify(user)
+      body: user
     })
     const data = await response.json()
 
@@ -51,7 +51,7 @@ export function AdminView() {
 
     setdata(prevUser => {
       if (isEditng) {
-        return prevUser.map(user => user.id === data.data.id ? data.data : user)
+        return prevUser.map(user => user.Client_id === data.data.Client_id ? data.data : user)
       }
 
       return [...prevUser, data.data]
@@ -61,7 +61,7 @@ export function AdminView() {
   }
 
   async function deleteUser(id) {
-    const response = await fetch(`http://localhost:3000/tasksview/${id}`, {
+    const response = await fetch(`http://localhost:3000/Adminview/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -70,10 +70,10 @@ export function AdminView() {
     })
 
     if (!response.ok) {
-      throw new Error('Error deleting task')
+      throw new Error('Error deleting user')
     }
 
-    setdata(prevUser => prevUser.filter(User => User.id !== id))
+    setdata(prevUser => prevUser.filter(User => User.Client_id !== id))
   }
 
   useEffect(() => {
