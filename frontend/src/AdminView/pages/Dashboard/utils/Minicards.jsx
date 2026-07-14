@@ -9,7 +9,7 @@ export function MinicardMpa({ data }) {
           )
       return (
         <div key={user.id} className='minicard CardStyle'>
-          <img className='icon' src='/TasksIcon.png' />
+          <img className='icon' src={`http://localhost:3000/uploads/${user.Img_rute}`} />
           <div style={{ width: '100%' }}>
             <div className='tiitle-tasks'>
               <p>{user.nombre}</p>

@@ -106,9 +106,14 @@
   color: #9333ea;
 }
 
-.role.user {
+.role.Employee {
   background: #dbeafe;
   color: #2563eb;
+}
+
+.role.supervisor {
+  background: #c1f7f0c5;
+  color: #01adc4;
 }
 
 .progress-container {

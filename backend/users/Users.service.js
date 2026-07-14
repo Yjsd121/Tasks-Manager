@@ -134,6 +134,7 @@ exports.MinicardsUsers = async () => {
     CONCAT(u.User_names, ' ', u.User_lastnames) AS nombre,
 
     COUNT(t.Task_id) AS asignadas,
+    u.Img_rute,
 
     SUM(CASE
         WHEN t.Status = 'completed' THEN 1
@@ -153,6 +154,8 @@ LEFT JOIN tasks t
 GROUP BY
     u.Client_id,
     u.User_names,
-    u.User_lastnames;
+    u.User_lastnames,
+    u.Img_rute
+
     `)
 }

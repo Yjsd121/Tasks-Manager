@@ -1,4 +1,4 @@
-import { Formlogin } from './Forms/loginform'
+import { Formlogin } from './Forms/loginform.tsx'
 import './login.css'
 
 export function Login() {
