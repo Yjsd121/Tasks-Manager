@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import './SideBar.css'
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined'
 import { Logout } from '@/utils/Logout'
+
 export function SideBar() {
   const navigate = useNavigate()
   return (
