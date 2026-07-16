@@ -1,6 +1,6 @@
-const MinichartService = require('./MinichartDara.service')
+import * as MinichartService from './MinichartDara.service.js'
 
-exports.MinichartTaskview = async (req, res) => {
+export const MinichartTaskview = async (req, res) => {
   try {
     const data = await MinichartService.TasksInfo(req.params.name)
 

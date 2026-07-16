@@ -1,5 +1,5 @@
-const Query = require('../utils/Query')
-const User = require('../models/User')
+import { Query } from '../utils/Query.js'
+import User from '../models/User.js'
 
 const userSelect = `
     u.Client_id,
@@ -26,7 +26,8 @@ const userGroup = `
     u.Role,
     u.Img_rute`
 
-exports.getusers = async () => {
+
+export const getusers = async () => {
     return await Query(`SELECT
     ${userSelect}
 
@@ -40,8 +41,8 @@ GROUP BY
     `)
 }
 
-exports.createUser = async (UserData) => {
-    const nextId = await exports.getnextautoincrement()
+export const createUser = async (UserData) => {
+    const nextId = await getnextautoincrement()
     const userD = new User({
         ...UserData,
         userid: User.buildUserId(UserData.User_names, UserData.User_lastnames, nextId)
@@ -58,11 +59,11 @@ exports.createUser = async (UserData) => {
         userD.toCreateParams()
     )
 
-    return await exports.getuserbyid(userD.userid)
+    return await getuserbyid(userD.userid)
 }
 
-exports.updateUser = async (id, userData) => {
-    const currentUser = await exports.getuserbyid(id)
+export const updateUser = async (id, userData) => {
+    const currentUser = await getuserbyid(id)
 
     if (!currentUser) {
         return null
@@ -94,16 +95,16 @@ exports.updateUser = async (id, userData) => {
         )
     }
 
-    return await exports.getuserbyid(id)
+    return await getuserbyid(id)
 }
 
-exports.deleteUser = async (id) => {
+export const deleteUser = async (id) => {
     const result = await Query('DELETE FROM users WHERE Client_id = ?', [id])
     return result.affectedRows > 0
 }
 
 
-exports.getuserbyid = async (id) => {
+export const getuserbyid = async (id) => {
     const rows = await Query(
         `SELECT
         ${userSelect}
@@ -118,7 +119,7 @@ exports.getuserbyid = async (id) => {
     return rows[0] || null
 }
 
-exports.getnextautoincrement = async () => {
+export const getnextautoincrement = async () => {
     const rows = await Query(
         'SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ?',
         ['users']
@@ -127,7 +128,7 @@ exports.getnextautoincrement = async () => {
     return rows[0]?.AUTO_INCREMENT || 1
 }
 // This query is for Dashboard
-exports.MinicardsUsers = async () => {
+export const MinicardsUsers = async () => {
     return await Query(`
     SELECT
     u.Client_id AS id,

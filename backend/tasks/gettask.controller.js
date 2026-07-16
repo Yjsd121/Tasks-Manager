@@ -1,6 +1,6 @@
-const tasksservice = require('./getTasks.service')
+import * as tasksservice from './getTasks.service.js'
 
-exports.gettasks = async (req, res) => {
+export const gettasks = async (req, res) => {
   try {
     const data = await tasksservice.gettasks(req.user.name)
 
@@ -23,7 +23,7 @@ exports.gettasks = async (req, res) => {
   }
 }
 
-exports.createtask = async (req, res) => {
+export const createtask = async (req, res) => {
   try {
     const task = await tasksservice.createtask(req.body, req.user)
 
@@ -47,7 +47,7 @@ exports.createtask = async (req, res) => {
   }
 }
 
-exports.updatetask = async (req, res) => {
+export const updatetask = async (req, res) => {
   try {
     const task = await tasksservice.updatetask(req.params.id, req.body)
 
@@ -78,7 +78,7 @@ exports.updatetask = async (req, res) => {
   }
 }
 
-exports.deletetask = async (req, res) => {
+export const deletetask = async (req, res) => {
   try {
     const deleted = await tasksservice.deletetask(req.params.id)
 

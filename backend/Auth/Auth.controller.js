@@ -1,10 +1,10 @@
-const authservices = require('./Auth.service')
-const jwt = require('jsonwebtoken')
+import { getusers } from './Auth.service.js'
+import jwt from 'jsonwebtoken' 
 
-exports.authlogin = async (req, res) => {
+export const authlogin = async (req, res) => {
   try {
     const { email, password } = req.body
-    const user = await authservices.getusers(email)
+    const user = await getusers(email)
     if (user.length === 0) {
       return res.status(404).json({
         ok: false,
@@ -45,7 +45,7 @@ exports.authlogin = async (req, res) => {
   }
 }
 
-exports.verify = async (req, res, next) => {
+export const verify = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization
 

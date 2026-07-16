@@ -1,22 +1,32 @@
-require('dotenv').config()
-const express = require('express')
-const cors = require('cors')
-const app = express()
-const port = 3000
-const authmiddleware = require('./middlewares/Auth.middleware')
+import "dotenv/config";
+import express from "express";
+import cors from "cors";
 
-app.use(cors())
-app.use(express.json())
-app.use('/uploads', express.static('uploads'));
+import authmiddleware from "./middlewares/Auth.middleware.js";
 
-app.use('/Auth', require('./Auth/Auth.routes'))
+import AuthRoutes from "./Auth/Auth.routes.js";
+import TaskRoutes from "./tasks/tasks.routes.js";
+import UserRoutes from "./users/user.routes.js";
+import MinichartRoutes from "./charts/Minichart/minichart.routes.js";
+import DashboardRoutes from "./charts/Dashboard/Dashboard.routes.js";
 
-app.use(authmiddleware)
-app.use('/tasksview', require('./tasks/tasks.routes'))
-app.use('/Adminview', require('./users/user.routes'))
-app.use('/Minichart', require('./charts/Minichart/minichart.routes'))
-app.use('/Dashboard', require('./charts/Dashboard/Dashboard.routes'))
+const app = express();
+const port = 3000;
+
+app.use(cors());
+app.use(express.json());
+
+app.use("/uploads", express.static("uploads"));
+
+app.use("/Auth", AuthRoutes);
+
+app.use(authmiddleware);
+
+app.use("/tasksview", TaskRoutes);
+app.use("/Adminview", UserRoutes);
+app.use("/Minichart", MinichartRoutes);
+app.use("/Dashboard", DashboardRoutes);
 
 app.listen(port, () => {
-  console.log(`Server listen in http://localhost:${port}`)
-})
+  console.log(`Server listening on http://localhost:${port}`);
+});

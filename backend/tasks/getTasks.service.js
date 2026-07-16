@@ -1,17 +1,17 @@
-const Query = require('../utils/Query')
-const Task = require('../models/Task')
+import { Query } from '../utils/Query.js'
+import Task from '../models/Task.js'
 
 const taskSelect = '`id`, `Task_id` AS taskId, `title`, `priority`, `Status` AS status, `Description` AS description, `Createdby` AS createdBy, `Assignedto` AS assignedTo, `Createat` AS createdAt, `dueDate`'
 
-exports.gettasks = async (name) => {
+export const gettasks = async (name) => {
   return await Query(
     `SELECT ${taskSelect} FROM tasks WHERE Assignedto = ?`,
     [name]
   )
 }
 
-exports.createtask = async (taskData, user) => {
-  const nextId = await exports.getnextautoincrement()
+export const createtask = async (taskData, user) => {
+  const nextId = await getnextautoincrement()
   const task = new Task({
     ...taskData,
     taskId: Task.buildTaskId(nextId),
@@ -29,10 +29,10 @@ exports.createtask = async (taskData, user) => {
     task.toCreateParams()
   )
 
-  return await exports.gettaskbyid(result.insertId)
+  return await gettaskbyid(result.insertId)
 }
 
-exports.updatetask = async (id, taskData) => {
+export const updatetask = async (id, taskData) => {
   const updates = Task.buildUpdate(taskData)
   const fields = Object.keys(updates)
 
@@ -52,15 +52,15 @@ exports.updatetask = async (id, taskData) => {
     return null
   }
 
-  return await exports.gettaskbyid(id)
+  return await gettaskbyid(id)
 }
 
-exports.deletetask = async (id) => {
+export const deletetask = async (id) => {
   const result = await Query('DELETE FROM tasks WHERE id = ?', [id])
   return result.affectedRows > 0
 }
 
-exports.gettaskbyid = async (id) => {
+export const gettaskbyid = async (id) => {
   const rows = await Query(
     `SELECT ${taskSelect} FROM tasks WHERE id = ?`,
     [id]
@@ -69,7 +69,7 @@ exports.gettaskbyid = async (id) => {
   return rows[0] || null
 }
 
-exports.getnextautoincrement = async () => {
+export const getnextautoincrement = async () => {
   const rows = await Query(
     'SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ?',
     ['tasks']
@@ -77,8 +77,9 @@ exports.getnextautoincrement = async () => {
 
   return rows[0]?.AUTO_INCREMENT || 1
 }
+
 //These Querys are for Dashboard 
-exports.TotalTask = async () => {
+export const TotalTask = async () => {
   const [result] = await Query(`
     SELECT
       COUNT(t.id) AS total,
@@ -108,7 +109,7 @@ exports.TotalTask = async () => {
   ]
 }
 
-exports.TasksUser = async () => {
+export const TasksUser = async () => {
   const result = await Query(`
     SELECT
       COUNT(*) AS Total,

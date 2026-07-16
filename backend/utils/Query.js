@@ -1,6 +1,6 @@
-const connection = require('./bdConnection.js')
+import { connection } from './bdConnection.js'
 
-function Query (sql, params = []) {
+export function Query(sql, params = []) {
   return new Promise((resolve, reject) => {
     connection.query(sql, params, (err, rows) => {
       if (err) reject(err)
@@ -8,5 +8,3 @@ function Query (sql, params = []) {
     })
   })
 }
-
-module.exports = Query

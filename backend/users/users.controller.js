@@ -1,6 +1,6 @@
-const Usersservice = require('./Users.service')
+import * as Usersservice from './Users.service.js'
 
-exports.getUsers = async (req, res) => {
+export const getUsers = async (req, res) => {
   try {
     const query = await Usersservice.getusers()
     return res.status(200).json({
@@ -14,7 +14,7 @@ exports.getUsers = async (req, res) => {
   }
 }
 
-exports.createUser = async (req, res) => {
+export const createUser = async (req, res) => {
   try {
     const {
       User_names,
@@ -55,7 +55,7 @@ exports.createUser = async (req, res) => {
   }
 }
 
-exports.updateUser = async (req, res) => {
+export const updateUser = async (req, res) => {
   try {
     const {
       User_names,
@@ -106,7 +106,7 @@ exports.updateUser = async (req, res) => {
   }
 }
 
-exports.deleteUser = async (req, res) => {
+export const deleteUser = async (req, res) => {
   try {
     const deleted = await Usersservice.deleteUser(req.params.id)
 

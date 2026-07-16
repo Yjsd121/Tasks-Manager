@@ -1,7 +1,8 @@
-const express = require('express')
+import express from 'express'
+import * as controller from './MinichartData.controller.js'
+
 const router = express.Router()
-const controller = require('./MinichartData.controller')
 
 router.get('/:name', controller.MinichartTaskview)
 
-module.exports = router
+export default router

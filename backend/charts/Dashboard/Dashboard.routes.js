@@ -1,9 +1,10 @@
-const express = require('express')
+import express from 'express'
+import * as controller from './Dashboard.controller.js'
+
 const router = express.Router()
-const controller = require('./Dashboard.controller')
 
 router.get('/Totaltask', controller.TotalTasks)
 router.get('/Usertask', controller.UsersTaks)
 router.get('/Mini', controller.minicards)
 
-module.exports = router
+export default router;

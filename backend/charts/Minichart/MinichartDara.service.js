@@ -1,6 +1,6 @@
-const Query = require('../../utils/Query')
+import { Query } from "../../utils/Query.js"
 
-exports.TasksInfo = async (name) => {
+export const TasksInfo = async (name) => {
 
   const [result] = await Query(`
     SELECT

@@ -1,7 +1,7 @@
-const TasksService = require('../../tasks/getTasks.service')
-const UserService = require('../../users/Users.service')
+import * as TasksService from '../../tasks/getTasks.service.js'
+import * as UserService from '../../users/Users.service.js'
 
-exports.TotalTasks = async (req, res) => {
+export const TotalTasks = async (req, res) => {
   try {
     const data = await TasksService.TotalTask()
 
@@ -21,7 +21,7 @@ exports.TotalTasks = async (req, res) => {
   }
 }
 
-exports.UsersTaks = async (req, res) => {
+export const UsersTaks = async (req, res) => {
   try {
     const data = await TasksService.TasksUser()
     if (data.length === 0) {
@@ -40,7 +40,7 @@ exports.UsersTaks = async (req, res) => {
   }
 }
 
-exports.minicards = async (req, res) => {
+export const minicards = async (req, res) => {
   try {
     const data = await UserService.MinicardsUsers()
 

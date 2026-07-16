@@ -1,5 +1,5 @@
-const query = require('../utils/Query')
+import { Query } from "../utils/Query.js"
 
-exports.getusers = async (email) => {
-  return await query('SELECT * FROM todoapp.users WHERE User_email = ? ', [email])
+export const getusers = async (email) => {
+  return await Query('SELECT * FROM todoapp.users WHERE User_email = ? ', [email])
 }
