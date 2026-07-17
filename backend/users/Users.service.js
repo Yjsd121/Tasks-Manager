@@ -2,42 +2,44 @@ import { Query } from '../utils/Query.js'
 import User from '../models/User.js'
 
 const userSelect = `
-    u.Client_id,
-    u.User_names,
-    u.User_lastnames,
-    u.User_email,
-    u.Role,
-    u.Img_rute,
+    u."Client_id",
+    u."User_names",
+    u."User_lastnames",
+    u."User_email",
+    u."Role",
+    u."Img_rute",
 
-    COUNT(t.id) AS assigned_tasks,
+    COUNT(t."id") AS assigned_tasks,
 
-    SUM(
+    COALESCE(SUM(
         CASE
-            WHEN t.Status = 'completed' THEN 1
+            WHEN t."Status" = 'completed' THEN 1
             ELSE 0
         END
-    ) AS completed_tasks`
+    ), 0) AS completed_tasks
+`
 
 const userGroup = `
-    u.Client_id,
-    u.User_names,
-    u.User_lastnames,
-    u.User_email,
-    u.Role,
-    u.Img_rute`
+    u."Client_id",
+    u."User_names",
+    u."User_lastnames",
+    u."User_email",
+    u."Role",
+    u."Img_rute"
+`
 
 
 export const getusers = async () => {
     return await Query(`SELECT
     ${userSelect}
 
-FROM users u
+    FROM users u
 
-LEFT JOIN tasks t
-    ON u.User_names = t.Assignedto
+    LEFT JOIN tasks t
+        ON u."Client_id" = t."Assignedto"
 
-GROUP BY
-    ${userGroup}
+    GROUP BY
+        ${userGroup}
     `)
 }
 
@@ -55,7 +57,7 @@ export const createUser = async (UserData) => {
     }
 
     const result = await Query(
-        'INSERT INTO users (`Client_id`,`User_names`,`User_lastnames`,`User_email`,`User_pass`,`Role`,`Img_rute`) VALUES (?,?,?,?,?,?,?)',
+        'INSERT INTO users ("Client_id","User_names","User_lastnames","User_email","User_pass","Role","Img_rute") VALUES ($1,$2,$3,$4,$5,$6,$7)',
         userD.toCreateParams()
     )
 
@@ -76,31 +78,24 @@ export const updateUser = async (id, userData) => {
         return { errors: ['No hay datos para actualizar'] }
     }
 
-    const setClause = fields.map(field => `${field} = ?`).join(', ')
+    const setClause = fields.map((field, index) => `"${field}" = $${index + 1}`).join(', ')
     const values = fields.map(field => updates[field])
 
-    const result = await Query(
-        `UPDATE users SET ${setClause} WHERE Client_id = ?`,
+    const rows = await Query(
+        `UPDATE users SET ${setClause} WHERE "Client_id" = $${fields.length + 1} RETURNING "Client_id"`,
         [...values, id]
     )
 
-    if (result.affectedRows === 0) {
+    if (rows.length === 0) {
         return null
-    }
-
-    if (userData.User_names && userData.User_names !== currentUser.User_names) {
-        await Query(
-            'UPDATE tasks SET Assignedto = ? WHERE Assignedto = ?',
-            [userData.User_names, currentUser.User_names]
-        )
     }
 
     return await getuserbyid(id)
 }
 
 export const deleteUser = async (id) => {
-    const result = await Query('DELETE FROM users WHERE Client_id = ?', [id])
-    return result.affectedRows > 0
+    const rows = await Query('DELETE FROM users WHERE "Client_id" = $1 RETURNING "Client_id"', [id])
+    return rows.length > 0
 }
 
 
@@ -110,8 +105,8 @@ export const getuserbyid = async (id) => {
         ${userSelect}
         FROM users u
         LEFT JOIN tasks t
-            ON u.User_names = t.Assignedto
-        WHERE u.Client_id = ?
+            ON u."User_email" = t."Createdby"
+        WHERE u."Client_id" = $1
         GROUP BY
         ${userGroup}`,
         [id]
@@ -121,42 +116,40 @@ export const getuserbyid = async (id) => {
 
 export const getnextautoincrement = async () => {
     const rows = await Query(
-        'SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ?',
-        ['users']
+        'SELECT COALESCE(MAX("id"), 0) + 1 AS next_id FROM users'
     )
 
-    return rows[0]?.AUTO_INCREMENT || 1
+    return Number(rows[0]?.next_id) || 1
 }
 // This query is for Dashboard
 export const MinicardsUsers = async () => {
     return await Query(`
     SELECT
-    u.Client_id AS id,
-    CONCAT(u.User_names, ' ', u.User_lastnames) AS nombre,
+        u."Client_id" AS id,
+        CONCAT(u."User_names", ' ', u."User_lastnames") AS nombre,
 
-    COUNT(t.Task_id) AS asignadas,
-    u.Img_rute,
+        COUNT(t."Task_id") AS asignadas,
+        u."Img_rute",
 
-    SUM(CASE
-        WHEN t.Status = 'completed' THEN 1
-        ELSE 0
-    END) AS completed,
+        COALESCE(SUM(CASE
+            WHEN t."Status" = 'completed' THEN 1
+            ELSE 0
+        END), 0) AS completed,
 
-    SUM(CASE
-        WHEN t.Status = 'pending' THEN 1
-        ELSE 0
-    END) AS pending
+        COALESCE(SUM(CASE
+            WHEN t."Status" = 'pending' THEN 1
+            ELSE 0
+        END), 0) AS pending
 
-FROM users u
+    FROM users u
 
-LEFT JOIN tasks t
-    ON u.User_names = t.Assignedto
+    LEFT JOIN tasks t
+        ON u."User_email" = t."Createdby"
 
-GROUP BY
-    u.Client_id,
-    u.User_names,
-    u.User_lastnames,
-    u.Img_rute
-
+    GROUP BY
+        u."Client_id",
+        u."User_names",
+        u."User_lastnames",
+        u."Img_rute"
     `)
 }

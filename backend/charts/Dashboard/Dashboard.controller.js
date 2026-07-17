@@ -6,7 +6,7 @@ export const TotalTasks = async (req, res) => {
     const data = await TasksService.TotalTask()
 
     if (data.length === 0) {
-      return res.status(401).json({
+      return res.status(404).json({
         ok: false,
         message: 'Sin Datos'
       })
@@ -24,8 +24,9 @@ export const TotalTasks = async (req, res) => {
 export const UsersTaks = async (req, res) => {
   try {
     const data = await TasksService.TasksUser()
+
     if (data.length === 0) {
-      return res.status(401).json({
+      return res.status(404).json({
         ok: false,
         message: ' No data'
       })
@@ -45,7 +46,7 @@ export const minicards = async (req, res) => {
     const data = await UserService.MinicardsUsers()
 
     if (data.length === 0) {
-      return res.status(401).json({
+      return res.status(404).json({
         ok: false,
         message: ' No data'
       })

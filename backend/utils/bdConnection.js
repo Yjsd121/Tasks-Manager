@@ -1,17 +1,26 @@
-import { createConnection } from 'mysql2'
+import { Pool } from "pg";
 
-export const connection = createConnection({
+const pool = new Pool({
   host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT),
+  database: process.env.DB_NAME,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
-  database: process.env.DB_NAME
-})
+});
 
-connection.connect(err => {
-  if (err) {
-    console.log(err)
-  } else {
-    console.log('MySQL connectiion is succesfully')
+async function connectDB() {
+  try {
+    const client = await pool.connect();
+
+    console.log("PostgreSQL conectado correctamente.");
+
+    client.release();
+  } catch (error) {
+    console.error("Error al conectar con PostgreSQL");
+    console.error(error);
+
+    process.exit(1);
   }
-})
+}
 
+export { pool, connectDB };

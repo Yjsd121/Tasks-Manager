@@ -31,6 +31,7 @@ export function AdminView() {
     }
 
     const info = await response.json();
+    console.log(info.data)
     return info.data;
   }
 

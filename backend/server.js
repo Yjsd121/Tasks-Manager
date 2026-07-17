@@ -10,9 +10,12 @@ import UserRoutes from "./users/user.routes.js";
 import MinichartRoutes from "./charts/Minichart/minichart.routes.js";
 import DashboardRoutes from "./charts/Dashboard/Dashboard.routes.js";
 
+import { connectDB } from "./utils/bdConnection.js";
+
 const app = express();
 const port = 3000;
 
+connectDB()
 app.use(cors());
 app.use(express.json());
 

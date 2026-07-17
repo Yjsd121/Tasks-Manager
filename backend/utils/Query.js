@@ -1,10 +1,7 @@
-import { connection } from './bdConnection.js'
+import { pool } from "./bdConnection.js";
 
-export function Query(sql, params = []) {
-  return new Promise((resolve, reject) => {
-    connection.query(sql, params, (err, rows) => {
-      if (err) reject(err)
-      else resolve(rows)
-    })
-  })
+export async function Query(sql, params = []) {
+  const result = await pool.query(sql, params);
+
+  return result.rows;
 }

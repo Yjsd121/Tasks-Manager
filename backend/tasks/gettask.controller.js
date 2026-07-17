@@ -2,8 +2,8 @@ import * as tasksservice from './getTasks.service.js'
 
 export const gettasks = async (req, res) => {
   try {
-    const data = await tasksservice.gettasks(req.user.name)
-
+    const data = await tasksservice.gettasks(req.user.id)
+    console.log(data)
     if (data.length === 0) {
       return res.status(404).json({
         ok: false,
@@ -101,4 +101,3 @@ export const deletetask = async (req, res) => {
     })
   }
 }
-

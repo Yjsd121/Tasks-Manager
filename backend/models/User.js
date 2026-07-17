@@ -79,7 +79,7 @@ class User {
 
     return Object.keys(allowedFields).reduce((updates, field) => {
       if (userData[field] !== undefined && userData[field] !== '') {
-        updates[`\`${allowedFields[field]}\``] =
+        updates[allowedFields[field]] =
           typeof userData[field] === 'string'
             ? userData[field].trim()
             : userData[field]

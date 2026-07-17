@@ -4,7 +4,6 @@ class Task {
     title,
     description,
     priority,
-    assignedTo,
     dueDate,
     createAt = new Date(),
     status = 'pending',
@@ -14,7 +13,6 @@ class Task {
     this.title = title?.trim()
     this.description = description?.trim()
     this.priority = priority
-    this.assignedTo = assignedTo
     this.dueDate = dueDate
     this.createAt = createAt
     this.status = status || 'pending'
@@ -27,7 +25,6 @@ class Task {
     if (!this.title) errors.push('El titulo es obligatorio')
     if (!this.description) errors.push('La descripcion es obligatoria')
     if (!this.priority) errors.push('La prioridad es obligatoria')
-    if (!this.assignedTo) errors.push('El responsable es obligatorio')
     if (!this.dueDate) errors.push('La fecha limite es obligatoria')
 
     return errors
@@ -41,7 +38,6 @@ class Task {
       this.status,
       this.description,
       this.createdBy,
-      this.assignedTo,
       this.createAt,
       this.dueDate
     ]
@@ -57,7 +53,6 @@ class Task {
       description: 'Description',
       status: 'Status',
       priority: 'priority',
-      assignedTo: 'Assignedto',
       dueDate: 'dueDate'
     }
   }
@@ -67,7 +62,7 @@ class Task {
 
     return Object.keys(allowedFields).reduce((updates, field) => {
       if (taskData[field] !== undefined && taskData[field] !== '') {
-        updates[`\`${allowedFields[field]}\``] =
+        updates[allowedFields[field]] =
           typeof taskData[field] === 'string'
             ? taskData[field].trim()
             : taskData[field]
