@@ -28,6 +28,9 @@ const userGroup = `
     u."Img_rute"
 `
 
+export const getuserIDS = async () => {
+    return await Query(`SELECT "Client_id", "User_names" FROM users`)
+}
 
 export const getusers = async () => {
     return await Query(`SELECT
@@ -105,7 +108,7 @@ export const getuserbyid = async (id) => {
         ${userSelect}
         FROM users u
         LEFT JOIN tasks t
-            ON u."User_email" = t."Createdby"
+            ON u."Client_id" = t."Assignedto"
         WHERE u."Client_id" = $1
         GROUP BY
         ${userGroup}`,
@@ -144,7 +147,7 @@ export const MinicardsUsers = async () => {
     FROM users u
 
     LEFT JOIN tasks t
-        ON u."User_email" = t."Createdby"
+        ON u."Client_id" = t."Assignedto"
 
     GROUP BY
         u."Client_id",

@@ -43,8 +43,12 @@ function formatDateInput(date?: string) {
   if (!date) return "";
   return String(date).split("T")[0];
 }
-
+interface User {
+  Client_id: string;
+  User_names: string;
+}
 export const AddTask: React.FC<Props> = ({ task, onCancel, onSave }) => {
+  //STATES
   const [formData, setFormData] = React.useState({
     ...initialTask,
     ...task,
@@ -53,6 +57,7 @@ export const AddTask: React.FC<Props> = ({ task, onCancel, onSave }) => {
 
   const [error, setError] = React.useState("");
   const isEditing = Boolean(task?.id);
+  const [userIDs, setUsersid] = React.useState<User[]>([]);
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -82,6 +87,25 @@ export const AddTask: React.FC<Props> = ({ task, onCancel, onSave }) => {
       setError(error.message);
     }
   };
+
+  React.useEffect(() => {
+    const getUsers = async () => {
+      const token = window.localStorage.getItem("token");
+      const response = await fetch("http://localhost:3000/Adminview/userid", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+      console.log(data.data);
+      setUsersid(data.data);
+    };
+
+    getUsers();
+  }, []);
 
   return (
     <form className="custom-form" onSubmit={handleSubmit}>
@@ -137,9 +161,9 @@ export const AddTask: React.FC<Props> = ({ task, onCancel, onSave }) => {
               label="Assigned to"
               onChange={handleSelectChange}
             >
-              {assignedUsers.map((user) => (
-                <MenuItem key={user} value={user}>
-                  {user}
+              {userIDs.map((user) => (
+                <MenuItem key={user.Client_id} value={user.Client_id}>
+                  {user.User_names}
                 </MenuItem>
               ))}
             </Select>

@@ -9,6 +9,7 @@ const taskSelect = `
   "Status" AS "status",
   "Description" AS "description",
   "Createdby" AS "createdBy",
+  "Assignedto" AS "assignedTo",
   "Createat" AS "createdAt",
   "dueDate"
 `
@@ -35,7 +36,7 @@ export const createtask = async (taskData, user) => {
   }
 
   const result = await Query(
-    'INSERT INTO tasks ("Task_id", "title", "priority", "Status", "Description", "Createdby", "Createat", "dueDate") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"',
+    'INSERT INTO tasks ("Task_id", "title", "priority", "Status", "Description", "Createdby","Assignedto", "Createat", "dueDate") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"',
     task.toCreateParams()
   )
 
@@ -121,14 +122,20 @@ export const TotalTask = async () => {
 export const TasksUser = async () => {
   const result = await Query(`
     SELECT
-      COUNT(*) AS Total,
-      "Createdby"
-    FROM tasks
-    WHERE "Status" = 'completed'
-    GROUP BY "Createdby"
+      COUNT(t."id") AS "Total",
+      t."Assignedto" AS "assignedTo",
+      CONCAT(u."User_names", ' ', u."User_lastnames") AS name
+    FROM tasks t
+    LEFT JOIN users u
+      ON u."Client_id" = t."Assignedto"
+    WHERE t."Status" = 'completed'
+    GROUP BY
+      t."Assignedto",
+      u."User_names",
+      u."User_lastnames"
   `)
   return result.map(item => ({
-    name: item.Createdby,
-    Total: item.total
+    name: item.name || item.assignedTo,
+    Total: item.Total
   }))
 }

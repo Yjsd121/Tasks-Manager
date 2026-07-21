@@ -7,7 +7,8 @@ class Task {
     dueDate,
     createAt = new Date(),
     status = 'pending',
-    createdBy = null
+    createdBy = null,
+    assignedTo = null
   }) {
     this.taskId = taskId
     this.title = title?.trim()
@@ -17,6 +18,7 @@ class Task {
     this.createAt = createAt
     this.status = status || 'pending'
     this.createdBy = createdBy
+    this.assignedTo = assignedTo
   }
 
   validate() {
@@ -25,6 +27,7 @@ class Task {
     if (!this.title) errors.push('El titulo es obligatorio')
     if (!this.description) errors.push('La descripcion es obligatoria')
     if (!this.priority) errors.push('La prioridad es obligatoria')
+    if (!this.assignedTo) errors.push('El usuario asignado es obligatorio')
     if (!this.dueDate) errors.push('La fecha limite es obligatoria')
 
     return errors
@@ -38,6 +41,7 @@ class Task {
       this.status,
       this.description,
       this.createdBy,
+      this.assignedTo,
       this.createAt,
       this.dueDate
     ]
@@ -53,6 +57,7 @@ class Task {
       description: 'Description',
       status: 'Status',
       priority: 'priority',
+      assignedTo: 'Assignedto',
       dueDate: 'dueDate'
     }
   }

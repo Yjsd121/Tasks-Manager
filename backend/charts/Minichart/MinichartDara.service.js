@@ -9,7 +9,7 @@ export const TasksInfo = async (name) => {
       COALESCE(SUM(CASE WHEN t."Status" = 'completed' THEN 1 ELSE 0 END), 0) AS "T_completed",
       COALESCE(SUM(CASE WHEN t."Status" = 'in progress' THEN 1 ELSE 0 END), 0) AS "T_inprogress"
     FROM tasks t
-    WHERE t."Createdby" = $1
+    WHERE t."Assignedto" = $1
   `, [name])
 
   return [

@@ -6,8 +6,10 @@ const router = express.Router()
 
 
 router.get('/users', controller.getUsers)
+router.get('/userid',controller.getuserIDS)
 router.post('/create', upload.single('Img_rute'), controller.createUser)
 router.put('/:id', upload.single('Img_rute'), controller.updateUser)
 router.delete('/:id', controller.deleteUser)
+
 
 export default router

@@ -1,3 +1,4 @@
+import User from '../models/User.js'
 import * as Usersservice from './Users.service.js'
 
 export const getUsers = async (req, res) => {
@@ -11,6 +12,25 @@ export const getUsers = async (req, res) => {
     console.log(err)
 
     return res.status(401)
+  }
+}
+
+export const getuserIDS = async (req, res) => {
+  try {
+    const UsersId = await Usersservice.getuserIDS()
+
+    if (UsersId.length === 0) {
+      return res.status(204).json({
+        ok: false,
+        message: 'no content'
+      })
+    }
+    return res.status(200).json({
+      ok: true,
+      data: UsersId
+    })
+  } catch (error) {
+    console.log(error)
   }
 }
 
