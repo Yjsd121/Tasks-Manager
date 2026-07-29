@@ -5,7 +5,7 @@ export type StatusTypes = (typeof StatusType)[keyof typeof StatusType];
 
 export interface Task {
   id?: string;
-  task_id?: string;
+  taskId?: string;
   title: string;
   description: string;
   priority: string;

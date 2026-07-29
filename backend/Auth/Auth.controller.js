@@ -1,10 +1,12 @@
 import { getusers } from './Auth.service.js'
-import jwt from 'jsonwebtoken' 
+import jwt from 'jsonwebtoken'
+import * as bcrypt from 'bcrypt'
 
 export const authlogin = async (req, res) => {
   try {
     const { email, password } = req.body
     const user = await getusers(email)
+
     if (user.length === 0) {
       return res.status(404).json({
         ok: false,
@@ -12,11 +14,9 @@ export const authlogin = async (req, res) => {
       })
     }
 
-    if (password != user[0].User_pass) {
-      return res.status(401).json({
-        message: 'Unauthorized'
-      })
-    } else {
+    const isValid = await bcrypt.compare(password, user[0].User_pass)
+
+    if (isValid) {
       const token = jwt.sign({
         id: user[0].Client_id,
         name: user[0].User_names,
@@ -38,6 +38,11 @@ export const authlogin = async (req, res) => {
         role: user[0].Role,
         name: user[0].User_names,
         img: user[0].Img_rute
+      })
+
+    } else {
+      return res.status(401).json({
+        message: 'Unauthorized'
       })
     }
   } catch (err) {

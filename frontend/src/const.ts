@@ -6,6 +6,6 @@ export const UserType = {
 
 export const StatusType = {
   Pending: "pending",
-  inprogress: "in progress",
+  inprogress: "in process",
   completed: "completed",
 } as const;

@@ -13,10 +13,10 @@ export const Searchfilters: React.FC<Props> = ({
   filter,
   setfilter,
 }) => {
-  const filters = ["all", "pending", "in-progress", "completed"];
+  const filters = ["all", "pending", "in process", "completed"];
 
   return (
-    <section className="Search-container">
+    <section className="Search-container CardStyle ">
       <div className="filters-container">
         {filters.map((item) => (
           <button

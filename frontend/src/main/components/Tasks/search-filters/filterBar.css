@@ -1,11 +1,16 @@
 .Search-container {
-  margin-top: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  height: 80px;
+  align-items: center;
+  border-radius: 20px;
 }
 
 .filters-container {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
   display: flex;
   gap: .5rem;
   padding: .4rem;
@@ -14,7 +19,6 @@
   border-radius: 12px;
   width: fit-content;
   align-items: center;
-  
 }
 
 .filter {

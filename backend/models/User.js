@@ -54,7 +54,7 @@ class User {
     const initials =
       `${name.trim()[0]}${lastname.trim()[0]}`.toUpperCase()
 
-    return `${year}-${initials}-${String(number).padStart(3, '0')}`
+    return `${year}-${initials}-${String(number).padStart(4, '0')}`
   }
 
   static getAllowedUpdateFields() {

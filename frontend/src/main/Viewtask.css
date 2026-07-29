@@ -74,3 +74,16 @@
 .btn-card:hover {
   color: rgb(230, 96, 96);
 }
+
+.task-card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: .2s;
+  height: fit-content;
+}
+
+.completed {
+  opacity: 0.5;
+}
+

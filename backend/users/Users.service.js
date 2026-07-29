@@ -1,5 +1,6 @@
 import { Query } from '../utils/Query.js'
 import User from '../models/User.js'
+import * as bcrypt from 'bcrypt'
 
 const userSelect = `
     u."Client_id",
@@ -48,9 +49,11 @@ export const getusers = async () => {
 
 export const createUser = async (UserData) => {
     const nextId = await getnextautoincrement()
+    const PasswordHash = await bcrypt.hash(UserData.Password, 10)
     const userD = new User({
         ...UserData,
-        userid: User.buildUserId(UserData.User_names, UserData.User_lastnames, nextId)
+        userid: User.buildUserId(UserData.User_names, UserData.User_lastnames, nextId),
+        password: PasswordHash
     })
 
     const errors = userD.validate()
@@ -74,7 +77,14 @@ export const updateUser = async (id, userData) => {
         return null
     }
 
-    const updates = User.buildUpdate(userData)
+    const haspass = userData.Password != undefined ? await bcrypt.hash(userData.Password, 10) : undefined
+
+    const UserD = new User({
+        ...userData,
+        Password: haspass
+    })
+
+    const updates = User.buildUpdate(UserD)
     const fields = Object.keys(updates)
 
     if (fields.length === 0) {

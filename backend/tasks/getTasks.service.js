@@ -40,7 +40,7 @@ export const createtask = async (taskData, user) => {
     task.toCreateParams()
   )
 
-  return await gettaskbyid(result[0].id)
+  return await gettaskbyid(result[0].Task_id)
 }
 
 export const updatetask = async (id, taskData) => {
@@ -55,7 +55,7 @@ export const updatetask = async (id, taskData) => {
   const values = fields.map(field => updates[field])
 
   const rows = await Query(
-    `UPDATE tasks SET ${setClause} WHERE "id" = $${fields.length + 1} RETURNING "id"`,
+    `UPDATE tasks SET ${setClause} WHERE "Task_id" = $${fields.length + 1} RETURNING "id"`,
     [...values, id]
   )
 
@@ -73,7 +73,7 @@ export const deletetask = async (id) => {
 
 export const gettaskbyid = async (id) => {
   const rows = await Query(
-    `SELECT ${taskSelect} FROM tasks WHERE "id" = $1`,
+    `SELECT ${taskSelect} FROM tasks WHERE "Task_id" = $1`,
     [id]
   )
 
@@ -95,7 +95,7 @@ export const TotalTask = async () => {
       COUNT(t.id) AS total,
       COALESCE(SUM(CASE WHEN t."Status" = 'pending' THEN 1 ELSE 0 END), 0) AS "T_pending",
       COALESCE(SUM(CASE WHEN t."Status" = 'completed' THEN 1 ELSE 0 END), 0) AS "T_completed",
-      COALESCE(SUM(CASE WHEN t."Status" = 'in progress' THEN 1 ELSE 0 END), 0) AS "T_inprogress"
+      COALESCE(SUM(CASE WHEN t."Status" = 'in process' THEN 1 ELSE 0 END), 0) AS "T_inprogress"
     FROM tasks t
     `)
 

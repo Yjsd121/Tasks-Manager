@@ -26,19 +26,6 @@ const initialTask: Task = {
   status: "pending",
 };
 
-const assignedUsers = [
-  "Carlos",
-  "Yader",
-  "Luis",
-  "Sofia",
-  "Pedro",
-  "Ana",
-  "David",
-  "Jorge",
-  "Kevin",
-  "Jose",
-];
-
 function formatDateInput(date?: string) {
   if (!date) return "";
   return String(date).split("T")[0];

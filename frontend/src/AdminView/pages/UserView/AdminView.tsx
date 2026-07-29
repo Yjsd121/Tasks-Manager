@@ -102,10 +102,12 @@ export function AdminView() {
     setEdit(data);
     setshow(true);
   }
+  
   function CloseModal() {
     setEdit(null);
     setshow(false);
   }
+
   return (
     <section className="AdminView-container">
       <SideBar />

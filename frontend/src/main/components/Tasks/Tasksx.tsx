@@ -50,9 +50,9 @@ export function Tasksx() {
   }
 
   async function saveTask(taskData: Task) {
-    const isEditing = Boolean(taskData.id);
+    const isEditing = Boolean(taskData.taskId);
     const response = await fetch(
-      `http://localhost:3000/tasksview${isEditing ? `/${taskData.id}` : ""}`,
+      `http://localhost:3000/tasksview${isEditing ? `/${taskData.taskId}` : ""}`,
       {
         method: isEditing ? "PUT" : "POST",
         headers: {
@@ -75,7 +75,7 @@ export function Tasksx() {
     setdata((prevTasks) => {
       if (isEditing) {
         return prevTasks.map((task: Task) =>
-          task.id === data.data.id ? data.data : task,
+          task.taskId === data.data.taskId ? data.data : task,
         );
       }
 
@@ -85,7 +85,7 @@ export function Tasksx() {
     closeModal();
   }
 
-  async function deleteTask(id: string) {
+  async function deleteTask(id: string | undefined) {
     const response = await fetch(`http://localhost:3000/tasksview/${id}`, {
       method: "DELETE",
       headers: {
@@ -121,6 +121,19 @@ export function Tasksx() {
     loadTasks();
   }, []);
 
+  const HandlechangeStatus = (id: string, status: Task["status"]) => {
+    const TasktoUpdate = Tasksdata.find((item) => item.taskId === id);
+
+    if (!TasktoUpdate) return;
+
+    const toUpdate = {
+      ...TasktoUpdate,
+      status: status,
+    };
+
+    saveTask(toUpdate);
+  };
+
   return (
     <div>
       <Searchfilters
@@ -149,6 +162,7 @@ export function Tasksx() {
           onDelete={deleteTask}
           onEdit={openEditModal}
           filter={filter}
+          handlechange={HandlechangeStatus}
         />
       )}
       {!loading && !hastask && (
