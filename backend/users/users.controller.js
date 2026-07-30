@@ -15,6 +15,27 @@ export const getUsers = async (req, res) => {
   }
 }
 
+export const gettingMe = async (req, res) => {
+  try {
+    
+    const Me = await Usersservice.getMe(req.user.id)
+
+    if (Me.length === 0) {
+      return res.status(204).json({
+        ok: false,
+        message: 'No data'
+      })
+    }
+
+    return res.status(200).json({
+      ok: true,
+      data: Me
+    })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 export const getuserIDS = async (req, res) => {
   try {
     const UsersId = await Usersservice.getuserIDS()

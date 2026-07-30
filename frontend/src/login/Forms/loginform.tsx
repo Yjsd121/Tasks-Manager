@@ -2,7 +2,7 @@ import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Authlogin } from "../service/Auth.service.ts";
+import { Authlogin, GetMe } from "../service/Auth.service.ts";
 
 export function Formlogin() {
   const navigate = useNavigate();
@@ -23,32 +23,37 @@ export function Formlogin() {
   async function handlesubmit(e: React.SubmitEvent) {
     e.preventDefault();
 
-    const response = await Authlogin(formData.email, formData.password);
+    const getToken = await Authlogin(formData.email, formData.password);
 
-    const data = await response.json();
-    if (!response.ok && data.message === "Unauthorized") {
+    const token = await getToken.json();
+    if (!getToken.ok && token.message === "Unauthorized") {
       setWrongPass(true);
       return;
     }
-    window.localStorage.setItem("token", data.token);
+    window.localStorage.setItem("token", token.token);
+
+    const data = await GetMe(token.token);
+
+    const infoUser = await data.json();
+    console.log(infoUser)
     window.localStorage.setItem(
       "user",
       JSON.stringify({
-        email: data.email,
-        id: data.id,
-        role: data.role,
-        name: data.name,
-        LastName: data.LastName,
-        Img: data.img,
+        email: infoUser.data[0].User_email,
+        id: infoUser.data[0].Client_id,
+        role: infoUser.data[0].Role,
+        name: infoUser.data[0].User_names,
+        LastName: infoUser.data[0].User_lastnames,
+        Img: infoUser.data[0].Img_rute,
       }),
     );
 
-    if (
-      (data.token && data.role === "Employee") ||
-      (data.token && data.role === "supervisor")
-    ) {
+    if (token.token && infoUser.data[0].Role === "Employee") {
       navigate("/tasksview");
-    } else if (data.token && data.role === "admin") {
+    } else if (
+      (token.token && infoUser.data[0].Role === "admin") ||
+      (token.token && infoUser.data[0].Role === "supervisor")
+    ) {
       navigate("/AdminView/Dashboard");
     }
   }

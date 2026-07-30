@@ -47,6 +47,14 @@ export const getusers = async () => {
     `)
 }
 
+export const getCredentials = async (email) => {
+    return await Query('SELECT "Client_id","User_email","User_pass","Role" FROM users WHERE "User_email" = $1 ', [email])
+}
+
+export const getMe = async (Client_id) => {
+    return await Query(`SELECT "Client_id", "User_names", "User_lastnames", "User_email", "Img_rute", "first_login","Role" FROM users WHERE "Client_id" = $1`, [Client_id])
+}
+
 export const createUser = async (UserData) => {
     const nextId = await getnextautoincrement()
     const PasswordHash = await bcrypt.hash(UserData.Password, 10)

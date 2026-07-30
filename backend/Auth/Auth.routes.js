@@ -4,6 +4,6 @@ import * as controller from "./Auth.controller.js";
 const router = express.Router();
 
 router.post("/login", controller.authlogin);
-router.get("/verify", controller.verify);
+// router.get("/verify", controller.verify);
 
 export default router;
