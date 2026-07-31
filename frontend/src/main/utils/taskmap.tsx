@@ -114,7 +114,6 @@ export const Tasksmap: React.FC<Props> = ({
                           value={item.status}
                           label="Status"
                           onChange={(e) => {
-                            console.log(item.taskId, e.target.value);
                             handlechange(
                               item.taskId!,
                               e.target.value as Task["status"],

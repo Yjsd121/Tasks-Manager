@@ -19,7 +19,6 @@ export const authlogin = async (req, res) => {
     if (isValid) {
       const token = jwt.sign({
         id: user[0].Client_id,
-        email: user[0].User_email,
         role: user[0].Role
       },
         process.env.JWT_SECRET,

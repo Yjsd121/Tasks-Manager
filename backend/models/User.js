@@ -7,12 +7,15 @@ class User {
     password,
     role,
     img = null,
+    first_login = true,
+
     User_names,
     User_lastnames,
     User_email,
     Password,
     Role,
-    Img_rute
+    Img_rute,
+    first_login: First_login
   }) {
     this.userid = userid
     this.name = (name || User_names)?.trim()
@@ -21,6 +24,7 @@ class User {
     this.password = password || Password
     this.role = role || Role
     this.img = img || Img_rute
+    this.first_login = first_login ?? First_login ?? true
   }
 
   validate() {
@@ -44,7 +48,8 @@ class User {
       this.email,
       this.password,
       this.role,
-      this.img
+      this.img,
+      this.first_login
     ]
   }
 
@@ -70,7 +75,9 @@ class User {
       User_email: 'User_email',
       Password: 'User_pass',
       Role: 'Role',
-      Img_rute: 'Img_rute'
+      Img_rute: 'Img_rute',
+      first_login: "first_login",
+      First_login: "first_login",
     }
   }
 

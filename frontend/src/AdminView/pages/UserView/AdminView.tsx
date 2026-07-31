@@ -31,7 +31,6 @@ export function AdminView() {
     }
 
     const info = await response.json();
-    console.log(info.data)
     return info.data;
   }
 
@@ -102,7 +101,7 @@ export function AdminView() {
     setEdit(data);
     setshow(true);
   }
-  
+
   function CloseModal() {
     setEdit(null);
     setshow(false);

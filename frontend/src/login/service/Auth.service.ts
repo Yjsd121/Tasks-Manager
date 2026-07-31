@@ -24,3 +24,24 @@ export async function GetMe(token: string) {
 
   return response;
 }
+
+interface changePass {
+  Password: string;
+  confirmPass: string;
+}
+
+export async function changefirstPass(
+  id: string | null,
+  Data: changePass,
+  token: string,
+) {
+  const response = await fetch(`http://localhost:3000/Adminview/${id}`, {
+    method: "PUT",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ Password: Data.Password }),
+  });
+
+  return response;
+}

@@ -77,3 +77,12 @@
   75%{transform: translateX(-1px);}
   100%{transform: translateX(1px);}
 }
+
+.Same{
+  color: rgb(41, 187, 41);
+}
+
+.NotSame{
+  color: rgb(253, 70, 70);
+  animation: shake .3s;
+}

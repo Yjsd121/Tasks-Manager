@@ -30,11 +30,11 @@ const userGroup = `
 `
 
 export const getuserIDS = async () => {
-    return await Query(`SELECT "Client_id", "User_names" FROM users`)
+  return await Query(`SELECT "Client_id", "User_names" FROM users`)
 }
 
 export const getusers = async () => {
-    return await Query(`SELECT
+  return await Query(`SELECT
     ${userSelect}
 
     FROM users u
@@ -48,81 +48,85 @@ export const getusers = async () => {
 }
 
 export const getCredentials = async (email) => {
-    return await Query('SELECT "Client_id","User_email","User_pass","Role" FROM users WHERE "User_email" = $1 ', [email])
+  return await Query('SELECT "Client_id","User_email","User_pass","Role" FROM users WHERE "User_email" = $1 ', [email])
 }
 
 export const getMe = async (Client_id) => {
-    return await Query(`SELECT "Client_id", "User_names", "User_lastnames", "User_email", "Img_rute", "first_login","Role" FROM users WHERE "Client_id" = $1`, [Client_id])
+  return await Query(`SELECT "Client_id", "User_names", "User_lastnames", "User_email", "Img_rute", "first_login","Role" FROM users WHERE "Client_id" = $1`, [Client_id])
 }
 
 export const createUser = async (UserData) => {
-    const nextId = await getnextautoincrement()
-    const PasswordHash = await bcrypt.hash(UserData.Password, 10)
-    const userD = new User({
-        ...UserData,
-        userid: User.buildUserId(UserData.User_names, UserData.User_lastnames, nextId),
-        password: PasswordHash
-    })
+  const nextId = await getnextautoincrement()
+  const PasswordHash = await bcrypt.hash(UserData.Password, 10)
+  const userD = new User({
+    ...UserData,
+    userid: User.buildUserId(UserData.User_names, UserData.User_lastnames, nextId),
+    password: PasswordHash
+  })
 
-    const errors = userD.validate()
+  const errors = userD.validate()
 
-    if (errors.length > 0) {
-        return { errors }
-    }
+  if (errors.length > 0) {
+    return { errors }
+  }
 
-    const result = await Query(
-        'INSERT INTO users ("Client_id","User_names","User_lastnames","User_email","User_pass","Role","Img_rute") VALUES ($1,$2,$3,$4,$5,$6,$7)',
-        userD.toCreateParams()
-    )
+  const result = await Query(
+    'INSERT INTO users ("Client_id","User_names","User_lastnames","User_email","User_pass","Role","Img_rute","first_login") VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
+    userD.toCreateParams()
+  )
 
-    return await getuserbyid(userD.userid)
+  return await getuserbyid(userD.userid)
 }
 
 export const updateUser = async (id, userData) => {
-    const currentUser = await getuserbyid(id)
+  const currentUser = await getuserbyid(id)
 
-    if (!currentUser) {
-        return null
-    }
+  if (!currentUser) {
+    return null
+  }
 
-    const haspass = userData.Password != undefined ? await bcrypt.hash(userData.Password, 10) : undefined
+  const haspass = userData.Password != undefined ? await bcrypt.hash(userData.Password, 10) : undefined
 
-    const UserD = new User({
-        ...userData,
-        Password: haspass
-    })
+  const UserD = new User({
+    ...userData,
+    Password: haspass
+  })
 
-    const updates = User.buildUpdate(UserD)
-    const fields = Object.keys(updates)
+  const updates = User.buildUpdate(UserD)
+  const fields = Object.keys(updates)
 
-    if (fields.length === 0) {
-        return { errors: ['No hay datos para actualizar'] }
-    }
+  if (fields.length === 0) {
+    return { errors: ['No hay datos para actualizar'] }
+  }
 
-    const setClause = fields.map((field, index) => `"${field}" = $${index + 1}`).join(', ')
-    const values = fields.map(field => updates[field])
+  const setClause = fields.map((field, index) => `"${field}" = $${index + 1}`).join(', ')
+  const values = fields.map(field => updates[field])
 
-    const rows = await Query(
-        `UPDATE users SET ${setClause} WHERE "Client_id" = $${fields.length + 1} RETURNING "Client_id"`,
-        [...values, id]
-    )
+  const rows = await Query(
+    `UPDATE users SET ${setClause} WHERE "Client_id" = $${fields.length + 1} RETURNING "Client_id"`,
+    [...values, id]
+  )
 
-    if (rows.length === 0) {
-        return null
-    }
+  if (rows.length === 0) {
+    return null
+  }
 
-    return await getuserbyid(id)
+  return await getuserbyid(id)
 }
 
 export const deleteUser = async (id) => {
-    const rows = await Query('DELETE FROM users WHERE "Client_id" = $1 RETURNING "Client_id"', [id])
-    return rows.length > 0
+  const rows = await Query('DELETE FROM users WHERE "Client_id" = $1 RETURNING "Client_id"', [id])
+  return rows.length > 0
+}
+
+export const changeFirstPass = async (id, Password) => {
+  return Query('UPDATE users SET User_pass = $1 WHERE Client_id = $2', [id, Password])
 }
 
 
 export const getuserbyid = async (id) => {
-    const rows = await Query(
-        `SELECT
+  const rows = await Query(
+    `SELECT
         ${userSelect}
         FROM users u
         LEFT JOIN tasks t
@@ -130,21 +134,21 @@ export const getuserbyid = async (id) => {
         WHERE u."Client_id" = $1
         GROUP BY
         ${userGroup}`,
-        [id]
-    )
-    return rows[0] || null
+    [id]
+  )
+  return rows[0] || null
 }
 
 export const getnextautoincrement = async () => {
-    const rows = await Query(
-        'SELECT COALESCE(MAX("id"), 0) + 1 AS next_id FROM users'
-    )
+  const rows = await Query(
+    'SELECT COALESCE(MAX("id"), 0) + 1 AS next_id FROM users'
+  )
 
-    return Number(rows[0]?.next_id) || 1
+  return Number(rows[0]?.next_id) || 1
 }
 // This query is for Dashboard
 export const MinicardsUsers = async () => {
-    return await Query(`
+  return await Query(`
     SELECT
         u."Client_id" AS id,
         CONCAT(u."User_names", ' ', u."User_lastnames") AS nombre,

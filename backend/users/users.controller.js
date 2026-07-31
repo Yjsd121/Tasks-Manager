@@ -118,6 +118,8 @@ export const updateUser = async (req, res) => {
       userData.Img_rute = req.file.filename
     }
 
+    console.log(userData)
+
     const user = await Usersservice.updateUser(req.params.id, userData)
 
     if (user?.errors) {
@@ -138,6 +140,7 @@ export const updateUser = async (req, res) => {
       ok: true,
       data: user
     })
+
   } catch (err) {
     console.log(err)
     return res.status(500).json({

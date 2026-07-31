@@ -3,11 +3,14 @@ import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Authlogin, GetMe } from "../service/Auth.service.ts";
+import { Modal } from "@/components/modal/modal.tsx";
+import { ChangePass } from "./ChangePassword.tsx";
 
 export function Formlogin() {
   const navigate = useNavigate();
-
+  const [showpass, setshowpass] = useState(false);
   const [WrongPass, setWrongPass] = useState(false);
+  const [firstlogin, setfirst] = useState(false);
   const [formData, setformData] = useState({
     email: "",
     password: "",
@@ -35,7 +38,6 @@ export function Formlogin() {
     const data = await GetMe(token.token);
 
     const infoUser = await data.json();
-    console.log(infoUser)
     window.localStorage.setItem(
       "user",
       JSON.stringify({
@@ -48,74 +50,80 @@ export function Formlogin() {
       }),
     );
 
-    if (token.token && infoUser.data[0].Role === "Employee") {
+    if (infoUser.data[0].first_login) {
+      setfirst(true);
+    } else {
+      goto(token.token, infoUser.data[0].Role);
+    }
+  }
+
+  function goto(token: String, Role: String) {
+    if (token && Role === "Employee") {
       navigate("/tasksview");
     } else if (
-      (token.token && infoUser.data[0].Role === "admin") ||
-      (token.token && infoUser.data[0].Role === "supervisor")
+      (token && Role === "admin") ||
+      (token && Role === "supervisor")
     ) {
       navigate("/AdminView/Dashboard");
     }
   }
 
   function ShowPassword() {
-    const pass = document.getElementById("password");
-    if (!pass) return;
-    const atributr = pass.getAttribute("type");
-
-    if (atributr === "password") {
-      pass.setAttribute("type", "text");
-    }
-    if (atributr === "text") {
-      pass.setAttribute("type", "password");
-    }
+    setshowpass(!showpass);
   }
 
   return (
-    <form className="login-container CardStyle" onSubmit={handlesubmit}>
-      <div className="login">
-        <label>User</label>
-        <div className="input-style">
-          <MailOutlineOutlinedIcon className="icon" />
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handlechange}
-            className="login-input"
-            placeholder="email"
-          />
+    <div>
+      <form className="login-container CardStyle" onSubmit={handlesubmit}>
+        <div className="login">
+          <label>User</label>
+          <div className="input-style">
+            <MailOutlineOutlinedIcon className="icon" />
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handlechange}
+              className="login-input"
+              placeholder="email"
+            />
+          </div>
+          <label>Password</label>
+          <div className="input-style">
+            <VpnKeyOutlinedIcon className="icon" />
+            <input
+              id="password"
+              type={showpass ? "text" : "password"}
+              name="password"
+              value={formData.password}
+              onChange={handlechange}
+              className="login-input"
+              placeholder="password"
+            />
+          </div>
+          {WrongPass && <p className="wrongpass">Wrong Password</p>}
         </div>
-        <label>Password</label>
-        <div className="input-style">
-          <VpnKeyOutlinedIcon className="icon" />
-          <input
-            id="password"
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handlechange}
-            className="login-input"
-            placeholder="password"
-          />
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            gap: ".5rem",
+          }}
+        >
+          <input type="checkbox" id="pass" onChange={ShowPassword} />
+          Show password
         </div>
-        {WrongPass && <p className="wrongpass">Wrong Password</p>}
-      </div>
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          gap: ".5rem",
-        }}
-      >
-        <input type="checkbox" id="pass" onChange={ShowPassword} />
-        Show password
-      </div>
 
-      <button type="submit" className="primary-button">
-        Login
-      </button>
-    </form>
+        <button type="submit" className="primary-button">
+          Login
+        </button>
+      </form>
+      {firstlogin && (
+        <Modal>
+          <ChangePass />
+        </Modal>
+      )}
+    </div>
   );
 }
