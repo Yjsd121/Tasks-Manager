@@ -41,6 +41,7 @@ export function Viewtask() {
       console.log(err);
     }
   }
+  
   useEffect(() => {
     async function load() {
       const data = await MiniData();

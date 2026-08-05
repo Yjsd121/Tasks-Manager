@@ -33,7 +33,10 @@ export const Tasksmap: React.FC<Props> = ({
       <div className="Block CardStyle">
         {tasks
           .filter((item) => {
-            return item.status === filter || filter === "all";
+            return (
+              (item != null && item.status === filter) ||
+              (item != null && filter === "all")
+            );
           })
           .map((item) => {
             const bg = getcolor(item.priority);
