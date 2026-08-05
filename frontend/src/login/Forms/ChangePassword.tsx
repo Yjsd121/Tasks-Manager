@@ -28,7 +28,7 @@ export const ChangePass = () => {
     if (user === null) return;
     if (!token) return;
 
-    changefirstPass(user.id, formData, token);
+    changefirstPass(formData, token);
   }
 
   return (

@@ -120,9 +120,14 @@ export const deleteUser = async (id) => {
 }
 
 export const changeFirstPass = async (id, Password) => {
-  return Query('UPDATE users SET User_pass = $1 WHERE Client_id = $2', [id, Password])
-}
+  const haspass = await bcrypt.hash(Password, 10)
+  console.log(haspass)
+  const rows = await Query('UPDATE users SET "User_pass" = $1, "first_login" = false WHERE "Client_id" = $2 RETURNING "Client_id"', [haspass, id])
 
+  console.log(rows)
+
+  return rows.length === 0 ? false : true
+}
 
 export const getuserbyid = async (id) => {
   const rows = await Query(

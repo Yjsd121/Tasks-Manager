@@ -14,7 +14,7 @@ router.post('/create', upload.single('Img_rute'), controller.createUser)
 
 //PUT
 router.put('/:id', upload.single('Img_rute'), controller.updateUser)
-
+router.put('/', controller.changeFirstPass)
 //DELETE
 router.delete('/:id', controller.deleteUser)
 

@@ -17,7 +17,7 @@ export const getUsers = async (req, res) => {
 
 export const gettingMe = async (req, res) => {
   try {
-    
+
     const Me = await Usersservice.getMe(req.user.id)
 
     if (Me.length === 0) {
@@ -118,8 +118,6 @@ export const updateUser = async (req, res) => {
       userData.Img_rute = req.file.filename
     }
 
-    console.log(userData)
-
     const user = await Usersservice.updateUser(req.params.id, userData)
 
     if (user?.errors) {
@@ -147,6 +145,27 @@ export const updateUser = async (req, res) => {
       ok: false,
       message: 'Error al actualizar usuario'
     })
+  }
+}
+
+export const changeFirstPass = async (req, res) => {
+  try {
+    const { Password } = req.body
+
+    const Firstchange = Usersservice.changeFirstPass(req.user.id, Password)
+
+    if (!Firstchange) {
+      return res.status(304).json({
+        ok: false,
+        message: 'Not changed'
+      })
+    }
+    return res.status(200).json({
+      ok: true,
+      message: 'Password changed'
+    })
+  } catch (err) {
+    console.log(err)
   }
 }
 

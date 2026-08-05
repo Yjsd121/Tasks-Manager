@@ -30,14 +30,12 @@ interface changePass {
   confirmPass: string;
 }
 
-export async function changefirstPass(
-  id: string | null,
-  Data: changePass,
-  token: string,
-) {
-  const response = await fetch(`http://localhost:3000/Adminview/${id}`, {
+export async function changefirstPass(Data: changePass, token: string) {
+  console.log(Data);
+  const response = await fetch(`http://localhost:3000/Adminview`, {
     method: "PUT",
     headers: {
+      "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ Password: Data.Password }),
