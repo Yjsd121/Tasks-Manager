@@ -1,3 +1,8 @@
+.correct {
+  display: flex;
+  padding: 0 300px;
+}
+
 .Tasks-container {
   margin-top: 20px;
   padding: 10px;
@@ -86,4 +91,3 @@
 .completed {
   opacity: 0.5;
 }
-

@@ -30,6 +30,6 @@ app.use("/Adminview", UserRoutes);
 app.use("/Minichart", MinichartRoutes);
 app.use("/Dashboard", DashboardRoutes);
 
-app.listen(port, () => {
+app.listen(port,"0.0.0.0", () => {
   console.log(`Server listening on http://localhost:${port}`);
 });

@@ -136,7 +136,7 @@ export function Tasksx() {
   };
 
   return (
-    <div>
+    <div style={{width:'100%'}}>
       <Searchfilters
         showmodal={showmodal}
         setshow={(value: boolean) => {

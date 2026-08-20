@@ -41,7 +41,7 @@ export function Viewtask() {
       console.log(err);
     }
   }
-  
+
   useEffect(() => {
     async function load() {
       const data = await MiniData();
@@ -54,7 +54,10 @@ export function Viewtask() {
     <main>
       <Barnav />
       <Minichart stats={Data} />
-      <Tasksx />
+
+      <div className="correct">
+        <Tasksx />
+      </div>
     </main>
   );
 }
