@@ -6,6 +6,7 @@ import Select from "@mui/material/Select";
 import { useState } from "react";
 import type { SelectChangeEvent } from "@mui/material/Select";
 import type { User } from "../../type";
+import { API_URL } from "@/service/Api";
 
 const InitialUser = {
   Client_id: "",
@@ -154,7 +155,7 @@ export const AddUserForm: React.FC<Props> = ({ user, onCancel, onSave }) => {
           src={
             preview ||
             (isEditinng
-              ? `http://localhost:3000/uploads/${formData.Img_rute}`
+              ? `${API_URL}/uploads/${formData.Img_rute}`
               : "/UserDefault.png")
           }
           alt="img profile"

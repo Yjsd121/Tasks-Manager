@@ -1,5 +1,7 @@
+import { API_URL } from "@/service/Api";
+
 export async function Authlogin(Email: string, pass: string) {
-  const response = await fetch("http://localhost:3000/Auth/login", {
+  const response = await fetch(`${API_URL}/Auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -14,7 +16,7 @@ export async function Authlogin(Email: string, pass: string) {
 }
 
 export async function GetMe(token: string) {
-  const response = await fetch("http://localhost:3000/Adminview/Me", {
+  const response = await fetch(`${API_URL}/Adminview/Me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -32,7 +34,7 @@ interface changePass {
 
 export async function changefirstPass(Data: changePass, token: string) {
   console.log(Data);
-  const response = await fetch(`http://localhost:3000/Adminview`, {
+  const response = await fetch(`${API_URL}/Adminview`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

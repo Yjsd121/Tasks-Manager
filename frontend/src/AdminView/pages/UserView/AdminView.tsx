@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { AddUserForm } from "../../forms/Adduser";
 
 import { type User } from "../../../type";
+import { API_URL } from "@/service/Api";
 
 export function AdminView() {
   const [data, setdata] = useState<User[]>([]);
@@ -16,7 +17,7 @@ export function AdminView() {
   const [editData, setEdit] = useState<User | null>(null);
 
   async function getusers(): Promise<User[]> {
-    const response = await fetch("http://localhost:3000/Adminview/users", {
+    const response = await fetch(`${API_URL}/Adminview/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +39,7 @@ export function AdminView() {
     const id = user.get("Client_id")?.toString();
     const isEditng = Boolean(id);
     const response = await fetch(
-      `http://localhost:3000/Adminview${isEditng ? `/${id}` : "/create"}`,
+      `${API_URL}/Adminview${isEditng ? `/${id}` : "/create"}`,
       {
         method: isEditng ? "PUT" : "POST",
         headers: {
@@ -70,7 +71,7 @@ export function AdminView() {
   }
 
   async function deleteUser(id: string) {
-    const response = await fetch(`http://localhost:3000/Adminview/${id}`, {
+    const response = await fetch(`${API_URL}/Adminview/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

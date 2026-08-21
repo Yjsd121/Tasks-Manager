@@ -5,6 +5,7 @@ import { Tasksx } from "./components/Tasks/Tasksx";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { type ListStast } from "../type";
+import { API_URL } from "@/service/Api";
 
 export function Viewtask() {
   const navigate = useNavigate();
@@ -16,16 +17,13 @@ export function Viewtask() {
       const userString = window.localStorage.getItem("user");
       const user = userString ? JSON.parse(userString) : null;
 
-      const response = await fetch(
-        `http://localhost:3000/Minichart/${user.name}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${token}`,
-          },
+      const response = await fetch(`${API_URL}/Minichart/${user.name}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
-      );
+      });
 
       if (!response.ok) {
         if (response.statusText === "Unauthorized") {

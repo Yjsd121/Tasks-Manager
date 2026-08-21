@@ -1,3 +1,4 @@
+import { API_URL } from "@/service/Api";
 import { type ListMini } from "@/type";
 
 interface Props {
@@ -14,7 +15,7 @@ export const MinicardMpa: React.FC<Props> = ({ data }) => {
       <div key={user.id} className="minicard CardStyle">
         <img
           className="icon"
-          src={`http://localhost:3000/uploads/${user.Img_rute}`}
+          src={`${API_URL}/uploads/${user.Img_rute}`}
         />
         <div style={{ width: "100%" }}>
           <div className="tiitle-tasks">

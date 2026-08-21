@@ -8,6 +8,7 @@ import { Tasksmap } from "@/main/utils/taskmap";
 import { useNavigate } from "react-router-dom";
 
 import { type ListTasks, type Task } from "../../../type";
+import { API_URL } from "@/service/Api";
 
 export function Tasksx() {
   const [filter, setFilter] = useState("all");
@@ -26,7 +27,7 @@ export function Tasksx() {
 
   async function gettasks() {
     try {
-      const response = await fetch("http://localhost:3000/tasksview", {
+      const response = await fetch(`${API_URL}/tasksview`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +54,7 @@ export function Tasksx() {
   async function saveTask(taskData: Task) {
     const isEditing = Boolean(taskData.taskId);
     const response = await fetch(
-      `http://localhost:3000/tasksview${isEditing ? `/${taskData.taskId}` : ""}`,
+      `${API_URL}/tasksview${isEditing ? `/${taskData.taskId}` : ""}`,
       {
         method: isEditing ? "PUT" : "POST",
         headers: {
@@ -87,7 +88,7 @@ export function Tasksx() {
   }
 
   async function deleteTask(id: string | undefined) {
-    const response = await fetch(`http://localhost:3000/tasksview/${id}`, {
+    const response = await fetch(`${API_URL}/tasksview/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

@@ -5,6 +5,7 @@ import { SideBar } from "../../components/SideBar/SideBar.jsx";
 import { MyChart } from "../../components/barchar.tsx";
 import { MinicardMpa } from "./utils/Minicards.jsx";
 import { type ListBar, type ListMini } from "../../../type.ts";
+import { API_URL } from "@/service/Api.js";
 
 export function Dashboard() {
   const [data, setdata] = useState<ListBar>([]);
@@ -17,7 +18,7 @@ export function Dashboard() {
   const token = window.localStorage.getItem("token");
 
   async function Getdatatasks() {
-    const response = await fetch("http://localhost:3000/Dashboard/Totaltask", {
+    const response = await fetch(`${API_URL}/Dashboard/Totaltask`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +30,7 @@ export function Dashboard() {
   }
 
   async function Getdatauser() {
-    const response = await fetch("http://localhost:3000/Dashboard/Usertask", {
+    const response = await fetch(`${API_URL}/Dashboard/Usertask`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +42,7 @@ export function Dashboard() {
   }
 
   async function Getminicards() {
-    const response = await fetch("http://localhost:3000/Dashboard/Mini", {
+    const response = await fetch(`${API_URL}/Dashboard/Mini`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
