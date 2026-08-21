@@ -88,7 +88,6 @@ export const AddTask: React.FC<Props> = ({ task, onCancel, onSave }) => {
       });
 
       const data = await response.json();
-      console.log(data.data);
       setUsersid(data.data);
     };
 
