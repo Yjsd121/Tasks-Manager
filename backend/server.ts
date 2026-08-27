@@ -15,7 +15,7 @@ import { connectDB } from "./utils/bdConnection.js";
 const app = express();
 const port = 3000;
 
-connectDB()
+void connectDB();
 app.use(cors());
 app.use(express.json());
 
@@ -30,6 +30,6 @@ app.use("/Adminview", UserRoutes);
 app.use("/Minichart", MinichartRoutes);
 app.use("/Dashboard", DashboardRoutes);
 
-app.listen(port,"0.0.0.0", () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(`Server listening on http://localhost:${port}`);
 });

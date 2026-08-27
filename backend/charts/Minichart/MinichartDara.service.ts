@@ -1,8 +1,9 @@
-import { Query } from "../../utils/Query.js"
+import { Query } from "../../utils/Query.js";
 
-export const TasksInfo = async (name) => {
-
-  const [result] = await Query(`
+export const TasksInfo = async (
+  name: string,
+): Promise<Record<string, unknown>[]> => {
+  const [result] = await Query<Record<string, string | number>>(`
     SELECT
       COUNT(t.id) AS total,
       COALESCE(SUM(CASE WHEN t."Status" = 'pending' THEN 1 ELSE 0 END), 0) AS "T_pending",
@@ -10,32 +11,32 @@ export const TasksInfo = async (name) => {
       COALESCE(SUM(CASE WHEN t."Status" = 'in progress' THEN 1 ELSE 0 END), 0) AS "T_inprogress"
     FROM tasks t
     WHERE t."Assignedto" = $1
-  `, [name])
+  `, [name]);
 
   return [
     {
       id: 1,
-      title: 'Total',
+      title: "Total",
       quantity: result.total,
-      color: '#3b82f6'
+      color: "#3b82f6",
     },
     {
       id: 2,
-      title: 'Pendientes',
+      title: "Pendientes",
       quantity: result.T_pending,
-      color: '#f59e0b'
+      color: "#f59e0b",
     },
     {
       id: 3,
-      title: 'Completadas',
+      title: "Completadas",
       quantity: result.T_completed,
-      color: '#10b981'
+      color: "#10b981",
     },
     {
       id: 4,
-      title: 'En progreso',
+      title: "En progreso",
       quantity: result.T_inprogress,
-      color: '#8b5cf6'
-    }
-  ]
-}
+      color: "#8b5cf6",
+    },
+  ];
+};
