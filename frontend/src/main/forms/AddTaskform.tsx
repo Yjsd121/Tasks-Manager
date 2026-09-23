@@ -78,12 +78,11 @@ export const AddTask: React.FC<Props> = ({ task, onCancel, onSave }) => {
 
   React.useEffect(() => {
     const getUsers = async () => {
-      const token = window.localStorage.getItem("token");
       const response = await fetch(`${API_URL}/Adminview/userid`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
+          credentials: "include",
         },
       });
 

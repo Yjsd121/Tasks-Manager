@@ -56,9 +56,6 @@ export const authlogin = async (req: Request, res: Response) => {
       return res.json({
         ok: true,
         message: "Login exitoso",
-        // Seguimos enviando el token en JSON momentáneamente por retrocompatibilidad 
-        // mientras adaptamos todo el frontend. Idealmente se debería remover.
-        token 
       });
     }
 
@@ -75,6 +72,16 @@ export const authlogin = async (req: Request, res: Response) => {
       message: "Error al iniciar sesion",
     });
   }
+};
+
+// Controlador para cerrar sesión (borrar la cookie)
+export const authlogout = async (req: Request, res: Response) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
+  return res.json({ ok: true, message: "Sesión cerrada correctamente" });
 };
 
 

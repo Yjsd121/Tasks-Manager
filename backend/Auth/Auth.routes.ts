@@ -30,6 +30,7 @@ const validateLogin = (req: express.Request, res: express.Response, next: expres
 
 // Inyectamos los middlewares en la ruta
 router.post("/login", loginLimiter, validateLogin, controller.authlogin);
+router.post("/logout", controller.authlogout);
 // router.get("/verify", controller.verify);
 
 export default router;

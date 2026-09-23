@@ -13,7 +13,6 @@ export function Viewtask() {
 
   async function MiniData() {
     try {
-      const token = window.localStorage.getItem("token");
       const userString = window.localStorage.getItem("user");
       const user = userString ? JSON.parse(userString) : null;
 
@@ -21,7 +20,7 @@ export function Viewtask() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
+          credentials: "include",
         },
       });
 

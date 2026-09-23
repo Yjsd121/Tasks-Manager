@@ -15,14 +15,12 @@ export function Dashboard() {
 
   const hasuser = minicards?.length > 0;
 
-  const token = window.localStorage.getItem("token");
-
   async function Getdatatasks() {
     const response = await fetch(`${API_URL}/Dashboard/Totaltask`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
+        credentials: "include",
       },
     });
     const data = await response.json();
@@ -34,7 +32,7 @@ export function Dashboard() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
+        credentials: "include",
       },
     });
     const data = await response.json();
@@ -46,7 +44,7 @@ export function Dashboard() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
+        credentials: "include",
       },
     });
 

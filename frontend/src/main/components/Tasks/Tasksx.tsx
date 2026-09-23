@@ -20,7 +20,6 @@ export function Tasksx() {
   const [loading, setLoading] = useState(true);
 
   const hastask = Tasksdata?.length > 0;
-  const token = window.localStorage.getItem("token");
 
 
   const navigate = useNavigate();
@@ -31,7 +30,7 @@ export function Tasksx() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
+          credentials: "include",
         },
       });
 
@@ -59,7 +58,7 @@ export function Tasksx() {
         method: isEditing ? "PUT" : "POST",
         headers: {
           "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
+          credentials: "include",
         },
         body: JSON.stringify(taskData),
       },
@@ -92,7 +91,7 @@ export function Tasksx() {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
+        credentials: "include",
       },
     });
 

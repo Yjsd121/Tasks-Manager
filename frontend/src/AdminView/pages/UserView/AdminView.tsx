@@ -11,7 +11,6 @@ import { API_URL } from "@/service/Api";
 
 export function AdminView() {
   const [data, setdata] = useState<User[]>([]);
-  const token = window.localStorage.getItem("token");
   const navigate = useNavigate();
 
   const [editData, setEdit] = useState<User | null>(null);
@@ -21,7 +20,7 @@ export function AdminView() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
+        credentials: "include",
       },
     });
     if (!response.ok) {
@@ -43,7 +42,7 @@ export function AdminView() {
       {
         method: isEditng ? "PUT" : "POST",
         headers: {
-          authorization: `Bearer ${token}`,
+          credentials: "include",
         },
         body: user,
       },
@@ -75,7 +74,7 @@ export function AdminView() {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
+        credentials: "include",
       },
     });
 

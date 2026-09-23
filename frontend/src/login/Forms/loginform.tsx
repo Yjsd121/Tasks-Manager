@@ -52,9 +52,7 @@ export function Formlogin() {
         return;
       }
       
-      window.localStorage.setItem("token", token.token);
-
-      const data = await GetMe(token.token);
+      const data = await GetMe();
       const infoUser = await data.json();
       
       window.localStorage.setItem(
@@ -72,7 +70,7 @@ export function Formlogin() {
       if (infoUser.data[0].first_login) {
         setfirst(true);
       } else {
-        goto(token.token, infoUser.data[0].Role);
+        goto(infoUser.data[0].Role);
       }
     } catch (error) {
       setErrorMessage("Error de conexión con el servidor");
@@ -81,12 +79,12 @@ export function Formlogin() {
     }
   }
 
-  function goto(token: String, Role: String) {
-    if (token && Role === "Employee") {
+  function goto(Role: String) {
+    if (Role === "Employee") {
       navigate("/tasksview");
     } else if (
-      (token && Role === "admin") ||
-      (token && Role === "supervisor")
+      (Role === "admin") ||
+      (Role === "supervisor")
     ) {
       navigate("/AdminView/Dashboard");
     }

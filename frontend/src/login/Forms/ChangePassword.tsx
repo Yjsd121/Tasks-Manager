@@ -21,7 +21,6 @@ export const ChangePass = () => {
 
   async function handlesubmit(e: React.SubmitEvent) {
     e.preventDefault();
-    const token = window.localStorage.getItem("token");
     const userString = window.localStorage.getItem("user");
     const user = userString ? JSON.parse(userString) : null;
 

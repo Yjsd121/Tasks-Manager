@@ -3,20 +3,20 @@ import jwt from "jsonwebtoken";
 
 function authMiddleware(req: Request, res: Response, next: NextFunction) {
   try {
-    const authHeader = req.headers.authorization;
+    // Intentar obtener el token primero de la cookie (más seguro), luego del header
+    let token = req.cookies?.token;
 
-    if (!authHeader) {
-      return res.status(401).json({
-        message: "required token",
-      });
+    if (!token) {
+      const authHeader = req.headers.authorization;
+      if (authHeader && authHeader.startsWith("Bearer ")) {
+        token = authHeader.split(" ")[1];
+      }
     }
-
-    const token = authHeader.split(" ")[1];
 
     if (!token) {
       return res.status(401).json({
         ok: false,
-        message: "Token requerido",
+        message: "Acceso denegado. Token no proporcionado.",
       });
     }
 
