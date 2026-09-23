@@ -18,8 +18,11 @@ const port = 3000;
 
 void connectDB();
 
-// Configuración CORS actualizada para permitir cookies
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+// Configuración CORS dinámica para permitir el cliente sin importar el puerto/IP
+app.use(cors({ 
+  origin: true, // Refleja dinámicamente el origen de la petición
+  credentials: true 
+}));
 app.use(express.json());
 app.use(cookieParser()); // Habilitar lectura de cookies
 
