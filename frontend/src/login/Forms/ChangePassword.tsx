@@ -25,9 +25,8 @@ export const ChangePass = () => {
     const user = userString ? JSON.parse(userString) : null;
 
     if (user === null) return;
-    if (!token) return;
 
-    changefirstPass(formData, token);
+    changefirstPass(formData);
   }
 
   return (
