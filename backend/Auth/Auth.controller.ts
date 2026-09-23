@@ -48,8 +48,8 @@ export const authlogin = async (req: Request, res: Response) => {
       // Enviamos el JWT como una cookie HttpOnly
       res.cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production", // Solo en producción
-        sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax", // Lax permite cross-port en localhost
+        secure: process.env.NODE_ENV === "production", // Requerido para sameSite="none"
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // none permite cookies cross-domain (Render a otro host)
         maxAge: 4 * 60 * 60 * 1000, // 4 horas
       });
 
@@ -79,7 +79,7 @@ export const authlogout = async (req: Request, res: Response) => {
   res.clearCookie("token", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
   });
   return res.json({ ok: true, message: "Sesión cerrada correctamente" });
 };
