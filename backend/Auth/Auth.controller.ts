@@ -49,7 +49,7 @@ export const authlogin = async (req: Request, res: Response) => {
       res.cookie("token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production", // Solo en producción
-        sameSite: "strict", // Prevenir CSRF
+        sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax", // Lax permite cross-port en localhost
         maxAge: 4 * 60 * 60 * 1000, // 4 horas
       });
 
@@ -79,7 +79,7 @@ export const authlogout = async (req: Request, res: Response) => {
   res.clearCookie("token", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
   });
   return res.json({ ok: true, message: "Sesión cerrada correctamente" });
 };

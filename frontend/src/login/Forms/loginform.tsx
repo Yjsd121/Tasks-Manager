@@ -55,6 +55,12 @@ export function Formlogin() {
       const data = await GetMe();
       const infoUser = await data.json();
       
+      if (!data.ok || !infoUser.data || infoUser.data.length === 0) {
+        setErrorMessage("Error al recuperar el perfil de usuario");
+        setIsLoading(false);
+        return;
+      }
+      
       window.localStorage.setItem(
         "user",
         JSON.stringify({
