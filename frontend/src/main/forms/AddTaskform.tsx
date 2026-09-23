@@ -82,8 +82,8 @@ export const AddTask: React.FC<Props> = ({ task, onCancel, onSave }) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "include",
-        },
+          },
+        credentials: "include",
       });
 
       const data = await response.json();

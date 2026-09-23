@@ -20,8 +20,8 @@ export function AdminView() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        },
         credentials: "include",
-      },
     });
     if (!response.ok) {
       if (response.statusText === "Unauthorized") {
@@ -42,8 +42,8 @@ export function AdminView() {
       {
         method: isEditng ? "PUT" : "POST",
         headers: {
-          credentials: "include",
-        },
+          },
+        credentials: "include",
         body: user,
       },
     );
@@ -74,8 +74,8 @@ export function AdminView() {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        },
         credentials: "include",
-      },
     });
 
     if (!response.ok) {

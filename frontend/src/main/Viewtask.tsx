@@ -20,8 +20,8 @@ export function Viewtask() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "include",
-        },
+          },
+        credentials: "include",
       });
 
       if (!response.ok) {

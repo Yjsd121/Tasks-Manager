@@ -30,8 +30,8 @@ export function Tasksx() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          credentials: "include",
-        },
+          },
+        credentials: "include",
       });
 
       if (!response.ok) {
@@ -58,8 +58,8 @@ export function Tasksx() {
         method: isEditing ? "PUT" : "POST",
         headers: {
           "Content-Type": "application/json",
-          credentials: "include",
-        },
+          },
+        credentials: "include",
         body: JSON.stringify(taskData),
       },
     );
@@ -91,8 +91,8 @@ export function Tasksx() {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        },
         credentials: "include",
-      },
     });
 
     if (!response.ok) {

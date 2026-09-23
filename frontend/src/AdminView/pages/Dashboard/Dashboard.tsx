@@ -20,8 +20,8 @@ export function Dashboard() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        },
         credentials: "include",
-      },
     });
     const data = await response.json();
     return data.data;
@@ -32,8 +32,8 @@ export function Dashboard() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        },
         credentials: "include",
-      },
     });
     const data = await response.json();
     return data.data;
@@ -44,8 +44,8 @@ export function Dashboard() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        },
         credentials: "include",
-      },
     });
 
     const data = await response.json();
