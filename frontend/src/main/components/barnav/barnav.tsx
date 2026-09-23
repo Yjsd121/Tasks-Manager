@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import "./barnav.css";
+import { API_URL } from "@/service/Api";
 
 export function Barnav() {
   const userString = localStorage.getItem("user");
@@ -26,7 +27,7 @@ export function Barnav() {
               style={{
                 width: "35px",
               }}
-              src={`http://localhost:3000/uploads/${user.Img}`}
+              src={`${API_URL}/uploads/${user.Img}`}
               alt="xd"
             />
             <p>{user.name}</p>

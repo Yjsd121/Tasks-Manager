@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 import authmiddleware from "./middlewares/Auth.middleware.js";
 
@@ -16,8 +17,11 @@ const app = express();
 const port = 3000;
 
 void connectDB();
-app.use(cors());
+
+// Configuración CORS actualizada para permitir cookies
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
+app.use(cookieParser()); // Habilitar lectura de cookies
 
 app.use("/uploads", express.static("uploads"));
 

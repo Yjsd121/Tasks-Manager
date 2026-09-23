@@ -10,24 +10,19 @@ export const authlogin = async (req: Request, res: Response) => {
       password?: string;
     };
 
-    if (!email || !password) {
-      return res.status(400).json({
-        ok: false,
-        message: "email y password son requeridos",
-      });
-    }
+    // La validación ya se hace en el middleware, por lo que email y password existen
+    const user = await getCredentials(email!);
 
-    const user = await getCredentials(email);
-
+    // Mensaje de error genérico para prevenir enumeración
     if (user.length === 0) {
-      return res.status(404).json({
+      return res.status(401).json({
         ok: false,
-        message: "usario no encontrado",
+        message: "Correo o contraseña incorrectos",
       });
     }
 
     const [credentials] = user;
-    const isValid = await bcrypt.compare(password, credentials.User_pass ?? "");
+    const isValid = await bcrypt.compare(password!, credentials.User_pass ?? "");
 
     if (isValid) {
       const secret = process.env.JWT_SECRET;
@@ -35,7 +30,7 @@ export const authlogin = async (req: Request, res: Response) => {
       if (!secret) {
         return res.status(500).json({
           ok: false,
-          message: "JWT_SECRET no configurado",
+          message: "Error interno del servidor",
         });
       }
 
@@ -49,14 +44,28 @@ export const authlogin = async (req: Request, res: Response) => {
           expiresIn: "4h",
         },
       );
+
+      // Enviamos el JWT como una cookie HttpOnly
+      res.cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production", // Solo en producción
+        sameSite: "strict", // Prevenir CSRF
+        maxAge: 4 * 60 * 60 * 1000, // 4 horas
+      });
+
       return res.json({
         ok: true,
-        token,
+        message: "Login exitoso",
+        // Seguimos enviando el token en JSON momentáneamente por retrocompatibilidad 
+        // mientras adaptamos todo el frontend. Idealmente se debería remover.
+        token 
       });
     }
 
+    // Mismo mensaje genérico si falla la contraseña
     return res.status(401).json({
-      message: "Unauthorized",
+      ok: false,
+      message: "Correo o contraseña incorrectos",
     });
   } catch (err) {
     console.log(err);

@@ -8,8 +8,12 @@ import { ChangePass } from "./ChangePassword.tsx";
 
 export function Formlogin() {
   const navigate = useNavigate();
+
   const [showpass, setshowpass] = useState(false);
-  const [WrongPass, setWrongPass] = useState(false);
+  // Estado para manejar mensajes de error genéricos del servidor
+  const [errorMessage, setErrorMessage] = useState("");
+  // Estado de carga para mejorar la UX y prevenir múltiples clicks
+  const [isLoading, setIsLoading] = useState(false);
   const [firstlogin, setfirst] = useState(false);
   const [formData, setformData] = useState({
     email: "",
@@ -21,39 +25,59 @@ export function Formlogin() {
       ...formData,
       [e.target.name]: e.target.value,
     });
+    // Limpiamos el error al escribir de nuevo
+    if (errorMessage) setErrorMessage("");
   }
 
-  async function handlesubmit(e: React.SubmitEvent) {
+  async function handlesubmit(e: React.FormEvent) {
     e.preventDefault();
-
-    const getToken = await Authlogin(formData.email, formData.password);
-
-    const token = await getToken.json();
-    if (!getToken.ok && token.message === "Unauthorized") {
-      setWrongPass(true);
+    
+    // Validación local simple
+    if (!formData.email || !formData.password) {
+      setErrorMessage("Por favor llena todos los campos");
       return;
     }
-    window.localStorage.setItem("token", token.token);
 
-    const data = await GetMe(token.token);
+    setIsLoading(true);
+    setErrorMessage("");
 
-    const infoUser = await data.json();
-    window.localStorage.setItem(
-      "user",
-      JSON.stringify({
-        email: infoUser.data[0].User_email,
-        id: infoUser.data[0].Client_id,
-        role: infoUser.data[0].Role,
-        name: infoUser.data[0].User_names,
-        LastName: infoUser.data[0].User_lastnames,
-        Img: infoUser.data[0].Img_rute,
-      }),
-    );
+    try {
+      const getToken = await Authlogin(formData.email, formData.password);
+      const token = await getToken.json();
 
-    if (infoUser.data[0].first_login) {
-      setfirst(true);
-    } else {
-      goto(token.token, infoUser.data[0].Role);
+      if (!getToken.ok) {
+        // Mostramos el mensaje devuelto por el backend (puede ser de Zod o credenciales inválidas)
+        setErrorMessage(token.message || "Error al iniciar sesión");
+        setIsLoading(false);
+        return;
+      }
+      
+      window.localStorage.setItem("token", token.token);
+
+      const data = await GetMe(token.token);
+      const infoUser = await data.json();
+      
+      window.localStorage.setItem(
+        "user",
+        JSON.stringify({
+          email: infoUser.data[0].User_email,
+          id: infoUser.data[0].Client_id,
+          role: infoUser.data[0].Role,
+          name: infoUser.data[0].User_names,
+          LastName: infoUser.data[0].User_lastnames,
+          Img: infoUser.data[0].Img_rute,
+        }),
+      );
+
+      if (infoUser.data[0].first_login) {
+        setfirst(true);
+      } else {
+        goto(token.token, infoUser.data[0].Role);
+      }
+    } catch (error) {
+      setErrorMessage("Error de conexión con el servidor");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -101,7 +125,7 @@ export function Formlogin() {
               placeholder="password"
             />
           </div>
-          {WrongPass && <p className="wrongpass">Wrong Password</p>}
+          {errorMessage && <p className="wrongpass" style={{ color: "red", textAlign: "center", marginTop: "10px" }}>{errorMessage}</p>}
         </div>
         <div
           style={{
@@ -115,8 +139,8 @@ export function Formlogin() {
           Show password
         </div>
 
-        <button type="submit" className="primary-button">
-          Login
+        <button type="submit" className="primary-button" disabled={isLoading}>
+          {isLoading ? "Iniciando..." : "Login"}
         </button>
       </form>
       {firstlogin && (
