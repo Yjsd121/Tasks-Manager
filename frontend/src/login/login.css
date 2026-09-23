@@ -1,17 +1,44 @@
 .principal {
+  /* Override global main background for neumorphism */
+  background-color: #e0e5ec !important;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
+  min-height: 100vh;
+  width: 100vw;
+  /* Para asegurarse de que cubra toda la pantalla, quitamos margin global si lo hubiera */
+  margin: 0;
+}
+
+/* Neumorphic Logo Container */
+.principal .logo-container {
+  background-color: #e0e5ec;
+  padding: 20px;
+  border-radius: 20px;
+  /* Raised Neumorphism */
+  box-shadow: 9px 9px 16px rgba(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Override global CardStyle just for the login form */
+.principal .CardStyle.login-container {
+  background-color: #e0e5ec;
+  border: none;
+  /* Raised Neumorphism */
+  box-shadow: 9px 9px 16px rgba(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5);
 }
 
 .login-container {
-  padding: 2rem;
+  padding: 2.5rem 2.5rem;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
+  width: 320px;
 }
 
 .login-container img {
@@ -19,70 +46,134 @@
 }
 
 .principal h2 {
-  color: rgb(126, 126, 126);
+  color: #7a8294;
+  text-shadow: 2px 2px 4px rgba(255,255,255, 0.8), -2px -2px 4px rgba(163,177,198,0.2);
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
+/* Form layout */
 .login {
   display: flex;
   flex-direction: column;
-  gap: .25rem;
+  gap: 1rem; 
 }
 
 .login label {
-  color: rgba(95, 95, 95, 0.87);
+  color: #7a8294;
+  font-weight: 500;
+  margin-left: 5px;
+  margin-bottom: -5px;
 }
 
-.color {
-  background-color: #7b7fcb;
-}
-
-.input-style {
+/* Input Fields - Sunken Neumorphism */
+.principal .input-style {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: .25rem;
-  height: 40px;
-  padding-left: 5px;
-  border-radius: 8px;
-  outline: none;
-  border: 2px solid transparent;
-  border-color: #d6d6d6;
-  background: #f1f1f1;
+  gap: .5rem;
+  height: 45px;
+  padding: 0 15px;
+  border-radius: 12px;
+  border: none;
+  background-color: #e0e5ec;
+  /* Sunken inner shadow */
+  box-shadow: inset 6px 6px 10px 0 rgba(163,177,198, 0.7), inset -6px -6px 10px 0 rgba(255,255,255, 0.8);
 }
 
 .icon {
-  color: rgba(95, 95, 95, 0.87);
+  color: #7b7fcb;
 }
 
 .login-input {
-  border: 2px solid transparent;
+  border: none;
   background-color: transparent;
-  color: rgba(95, 95, 95, 0.87);
+  color: #4d4d4d;
+  width: 100%;
+  font-size: 1rem;
+}
+.login-input:focus {
+  outline: none;
+}
+
+/* Primary Button - Raised Neumorphism */
+.principal .primary-button {
+  height: 45px;
+  border-radius: 12px;
+  border: none;
+  background-color: #e0e5ec !important; /* overrides App.css inline/specificity */
+  color: #7b7fcb !important;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  /* Raised */
+  box-shadow: 9px 9px 16px rgba(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5) !important;
+  margin-top: 1rem;
+}
+
+.principal .primary-button:hover {
+  color: #6266ad !important;
+  box-shadow: inset 4px 4px 8px rgba(163,177,198, 0.7), inset -4px -4px 8px rgba(255,255,255, 0.8) !important;
+}
+
+.principal .primary-button:active {
+  box-shadow: inset 6px 6px 10px rgba(163,177,198, 0.8), inset -6px -6px 10px rgba(255,255,255, 0.9) !important;
+}
+
+.principal .primary-button:disabled {
+  color: #a3b1c6 !important;
+  box-shadow: none !important;
+  cursor: not-allowed;
+}
+
+/* Checkbox Neumorphism */
+.principal input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: #e0e5ec;
+  border-radius: 5px;
+  box-shadow: inset 3px 3px 6px rgba(163,177,198, 0.7), inset -3px -3px 6px rgba(255,255,255, 0.8);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.principal input[type="checkbox"]:checked::after {
+  content: '✔';
+  color: #7b7fcb;
+  font-size: 14px;
+}
+
+.principal .show-pass-container {
+  color: #7a8294;
+  font-weight: 500;
 }
 
 .btn-form {
   box-shadow: 0px 3px 3px 0 rgba(0, 0, 0, 0.2);
 }
 
-.wrongpass{
-  font-size: 1rem;
-  color: red;
+.wrongpass {
+  font-size: 0.9rem;
+  color: #ff4d4d;
   animation: shake .3s;
-
 }
 
 @keyframes shake {
-  0% {transform: translateX(-1px);}
-  50%{transform: translateX(1px);}
-  75%{transform: translateX(-1px);}
-  100%{transform: translateX(1px);}
+  0% {transform: translateX(-2px);}
+  50%{transform: translateX(2px);}
+  75%{transform: translateX(-2px);}
+  100%{transform: translateX(2px);}
 }
 
-.Same{
+.Same {
   color: rgb(41, 187, 41);
 }
 
-.NotSame{
+.NotSame {
   color: rgb(253, 70, 70);
   animation: shake .3s;
 }

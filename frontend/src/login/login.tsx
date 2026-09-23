@@ -4,14 +4,7 @@ import './login.css'
 export function Login() {
   return (
     <main className='principal'>
-      <div
-        style={{
-          background: 'white',
-          padding: '20px',
-          borderRadius: '20px'
-        }}
-        className='CardStyle'
-      >
+      <div className='logo-container'>
         <img style={{ width: '60px' }} src='TasksIcon.png' />
       </div>
 

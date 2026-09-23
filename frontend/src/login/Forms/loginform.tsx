@@ -126,6 +126,7 @@ export function Formlogin() {
           {errorMessage && <p className="wrongpass" style={{ color: "red", textAlign: "center", marginTop: "10px" }}>{errorMessage}</p>}
         </div>
         <div
+          className="show-pass-container"
           style={{
             width: "100%",
             display: "flex",
@@ -134,7 +135,7 @@ export function Formlogin() {
           }}
         >
           <input type="checkbox" id="pass" onChange={ShowPassword} />
-          Show password
+          <label htmlFor="pass" style={{ margin: 0, cursor: 'pointer' }}>Show password</label>
         </div>
 
         <button type="submit" className="primary-button" disabled={isLoading}>
